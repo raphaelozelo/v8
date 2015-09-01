@@ -70,15 +70,15 @@
                             <f:convertDateTime pattern="dd/MM/yyyy  hh:mm" dateStyle="short" timeStyle="short" locale="pt_BR" type="both"/></h:outputLabel> 
                         <br/>
                         <br/>
-                        <span class="operadorSair" ><i title="Sair"  class="fa fa-power-off fa-4x" /></span>
+                        <span class="operadorSair" ><a href="/SairServlet"><i title="Sair"  class="fa fa-power-off fa-4x" /></a></span>
                     </h:panelGroup>
             <p:graphicImage value="/resources/img/icon/agenda.png" title="Agenda" class="operadorMenuLink"/> 
-            <h:outputLink value="/v7/adm/lembrete.faces?faces-redirect=true" >
+            <h:outputLink value="/adm/lembrete.faces?faces-redirect=true" >
             <p:graphicImage value="/resources/img/icon/postit100.png" title="Lembretes" class="operadorMenuLink"/> 
             </h:outputLink>
         </h:panelGrid> 
             </p:overlayPanel>
-  <span class="operadorSair"><a href="/sairServlet"><i title="Sair"  class="fa fa-power-off fa-2x" style="color: red;"/></a></span>
+  <span class="operadorSair"><a href="/SairServlet"><i title="Sair"  class="fa fa-power-off fa-2x" style="color: red;"/></a></span>
         &nbsp;
         </f:facet>
     </p:menubar>
