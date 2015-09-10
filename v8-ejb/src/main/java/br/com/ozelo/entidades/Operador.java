@@ -76,8 +76,9 @@ private boolean viewContasPagar;
 @Column
 @NotNull
 private boolean viewContasReceber;
-
-
+@Column
+@NotNull
+private boolean viewAdmSite;
 
 
 
@@ -272,6 +273,14 @@ public String getMd5(String message) {
 
     public void setViewContasReceber(boolean viewContasReceber) {
         this.viewContasReceber = viewContasReceber;
+    }
+
+    public boolean isViewAdmSite() {
+        return viewAdmSite;
+    }
+
+    public void setViewAdmSite(boolean viewAdmSite) {
+        this.viewAdmSite = viewAdmSite;
     }
 
     @Override

@@ -46,7 +46,14 @@ abstract class BasicDao {
         Query qr = createQuery(query, values);
         return (T) qr.getSingleResult();
     }
-    
+
+    protected <T> T getValorUnico(Class<T> classToCast,String query,String value) {
+        Query qr = createQuery(query, value.toUpperCase());
+        List <T> listResult = qr.getResultList();
+        if (listResult.isEmpty()) return null;
+        return (T) listResult.get(0);
+    }
+        
     protected int executeCommand(String query,Object... values) {
         Query qr = createQuery(query, values);
         return qr.executeUpdate();
