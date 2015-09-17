@@ -11,26 +11,28 @@
         <p:panelGrid columns="2" >
             <f:facet name="header">Cadastro Próprio</f:facet>
             <p:outputLabel for="id" value="Id:"/>
-            <p:outputLabel id="id" value="#{operadorMB.operadorLogado.id}"/>
+            <p:outputLabel id="id" value="#{operadorMB.operadorLogado.id}" class="labelStrong"/>
             <p:outputLabel for="apelido" value="Apelido:"/>
-            <p:inputText id="apelido" disabled="true" value="#{operadorMB.operadorLogado.apelido}"/>
+            <p:outputLabel id="apelido" value="#{operadorMB.operadorLogado.apelido}"class="labelStrong"/>
             <p:outputLabel for="nome" value="Nome:"/>
-            <p:inputText id="nome" disabled="true" value="#{operadorMB.operadorLogado.nome}"/>
+            <p:outputLabel id="nome" value="#{operadorMB.operadorLogado.nome}"class="labelStrong" />
             <p:outputLabel for="nrAcesso" value="Nº Acessos:"/>
-            <p:outputLabel id="nrAcesso" value="#{operadorMB.operadorLogado.nrAcessos}"/>
+            <p:outputLabel id="nrAcesso" value="#{operadorMB.operadorLogado.nrAcessos}" class="labelStrong"/>
             <p:outputLabel for="ulAcesso" value="Último Acesso:"/>
-            <p:outputLabel id="ulAcesso" value="#{operadorMB.operadorLogado.dtUltAcesso}">
+            <p:outputLabel id="ulAcesso" value="#{operadorMB.operadorLogado.dtUltAcesso}" class="labelStrong">
               <f:convertDateTime locale="pt" dateStyle="long" pattern="dd/MM/yyyy  HH:mm" /></p:outputLabel>
             <p:outputLabel value=""/> <p:outputLabel value=""/>
-            <p:outputLabel for="dtNasc" value="Dt.Nascimento:"/>
+            <p:outputLabel for="dtNasc" value="Dt.Nascimento:" />
             <p:calendar id="dtNasc" locale="pt_BR" navigator="true" pattern="dd/MM/YYYY" value="#{operadorMB.operadorLogado.dtNasc}"/>
             <p:outputLabel for="sexo" value="Sexo:"/>
-                <p:selectOneRadio id="sexo" value="#{operadorMB.operadorLogado.sexo}">
+                <p:selectOneRadio id="sexo" value="#{operadorMB.operadorLogado.sexo}" >
                   <f:selectItem itemLabel="Fem." itemValue="F" />
                   <f:selectItem itemLabel="Masc." itemValue="M" />
                 </p:selectOneRadio>         
             <p:outputLabel for="email" value="e-Mail:"/>
-            <p:inputText id="email" value="#{operadorMB.operadorLogado.email}"/>
+            <p:inputText id="email" value="#{operadorMB.operadorLogado.email}" validatorMessage="e-Mail Inválido!">
+            <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+            </p:inputText>
             <p:commandButton value="Trocar a Senha" action="/adm/config/trocaSenha.faces?faces-redirect=true"/><p:outputLabel value=""/>
             <f:facet name="footer" >
             <p:commandButton value="Confirma Edição" action="#{operadorMB.editaProprio}"/>
