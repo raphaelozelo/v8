@@ -93,6 +93,7 @@ public void iniciar (){
   this.setViewContasPagar(false);
   this.setViewContasReceber(false);
   this.setViewPendenciaVeic(false);
+  this.setViewAdmSite(false);
   this.setDtAdmissao(new Date());
   this.setNivel(1);
   this.setSenha(getMd5("123456"));
