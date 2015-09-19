@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet(name = "SairServlet", urlPatterns = {"/SairServlet"})
+@WebServlet(name = "SairServlet", urlPatterns = {"v8/SairServlet"})
 public class SairServlet extends HttpServlet {
 
     /**
@@ -23,7 +23,7 @@ public class SairServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.getSession().invalidate();
-        response.sendRedirect("/login.faces");
+        response.sendRedirect("v8/login.faces");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

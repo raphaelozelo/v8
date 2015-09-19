@@ -49,8 +49,8 @@
         <p:submenu label="Configurações" icon="ui-icon-help">
             <p:menuitem value="Fabricante/Modelo" action="/adm/config/fabricante.xhtml?faces-redirect=true"/>
             <p:menuitem value="Marca/Modelo" action="/adm/config/marcaModelo.xhtml?faces-redirect=true"/>
-            <p:menuitem value="Operadores" action="/adm/restrito/diretor/config/listOperador.xhtml?faces-redirect=true" disabled="#{operadorMB.operadorLogado.nivel lt 4}"/>
-            <p:menuitem value="Auditoria" action="/adm/restrito/diretor/config/listOperador.xhtml?faces-redirect=true"/>   
+            <p:menuitem value="Operadores" action="/adm/diretor/config/listOperador.xhtml?faces-redirect=true" disabled="#{operadorMB.operadorLogado.nivel lt 4}"/>
+            <p:menuitem value="Auditoria" action="/adm/diretor/config/listOperador.xhtml?faces-redirect=true" disabled="#{operadorMB.operadorLogado.nivel lt 5}"/>   
             <p:menuitem value="Cadastro Próprio" action="/adm/config/cadProprio.faces?faces-redirect=true"/>
         </p:submenu>
    
@@ -70,7 +70,7 @@
                             <f:convertDateTime pattern="dd/MM/yyyy  hh:mm" dateStyle="short" timeStyle="short" locale="pt_BR" type="both"/></h:outputLabel> 
                         <br/>
                         <br/>
-                        <span class="operadorSair" ><a href="/SairServlet"><i title="Sair"  class="fa fa-power-off fa-4x" /></a></span>
+                        <span class="operadorSair" ><a href="./../SairServlet"><i title="Sair"  class="fa fa-power-off fa-4x" /></a></span>
                     </h:panelGroup>
             <p:graphicImage value="/resources/img/icon/agenda.png" title="Agenda" class="operadorMenuLink"/> 
             <h:outputLink value="/adm/lembrete.faces?faces-redirect=true" >
@@ -78,7 +78,7 @@
             </h:outputLink>
         </h:panelGrid> 
             </p:overlayPanel>
-  <span class="operadorSair"><a href="/SairServlet"><i title="Sair"  class="fa fa-power-off fa-2x" style="color: red;"/></a></span>
+  <span class="operadorSair"><a href="v8/SairServlet"><i title="Sair"  class="fa fa-power-off fa-2x" style="color: red;"/></a></span>
         &nbsp;
         </f:facet>
     </p:menubar>
