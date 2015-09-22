@@ -24,6 +24,7 @@ public class OperadorMB extends BaseMB{
     
     private Operador operadorLogado;
    
+    private static final String OPERADOR_NOVO_CADASTRO = "/adm/diretor/config/operadorNovoCadastro.xhtml?faces-redirect=true";
     private static final String OPERADOR_CADASTRO = "/adm/diretor/config/operadorCadastro.xhtml?faces-redirect=true";
     private static final String OPERADOR_LISTA = "/adm/diretor/config/listOperador.xhtml?faces-redirect=true";
     private static final String OPERADOR_DEMITIDO = "/adm/diretor/config/operadorDemitido.xhtml?faces-redirect=true";
@@ -97,13 +98,14 @@ public class OperadorMB extends BaseMB{
         operadorSelecionado = null;
         operadorView = new Operador ();
         operadorView.iniciar();
-       return OPERADOR_CADASTRO;    
+     return OPERADOR_NOVO_CADASTRO;    
     }
     public String addOperador(){
        if (existsViolationsForJSF(operadorView)){
-    return OPERADOR_CADASTRO; 
+    return OPERADOR_NOVO_CADASTRO; 
        } 
         operadorService.novoOperador(operadorView);
+         fabricarLog(operadorLogado, 2, "Cadastrado Novo Operador: ["+operadorView.getApelido()+"]"+operadorView.getNome(), operadorView);
         operadoresAtivos = null;
        return OPERADOR_LISTA; 
     }
@@ -153,9 +155,7 @@ public class OperadorMB extends BaseMB{
         fabricarLog(operadorLogado, 1, "Operador Cadastrou Uma Nova Senha", null);
       return INDEX_PAGE;
           } else {
-              System.out.println(password);
-              System.out.println(isEditar);
-               createFacesErrorMessage("Erro!","Senha Atual Não Confere!");      
+             createFacesErrorMessage("Erro!","Senha Atual Não Confere!");      
               fabricarLog(operadorLogado, 1, "Senha Atual do Operador Não Confere, Foi Negado o Cadastramento de Nova Senha", null);
               password=null;
               newPassword=null;
