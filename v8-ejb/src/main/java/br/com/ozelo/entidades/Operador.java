@@ -32,7 +32,7 @@ private String apelido;
 @Column (length= 1)
 @NotNull (message="Sexo do Operador Deve Ser Informado!")
 private String sexo;
-@Column (length = 15)
+@Column (length = 30)
 @NotNull (message="Função do Operador Deve Ser Informado!")
 private String funcao;
 @Column
@@ -41,7 +41,7 @@ private String email;
 @NotNull (message="Senha Deve Ser Informada!")
 private String senha;
 @Column
-@NotNull (message="Nível de Atividade Deve Ser Informado!")
+@NotNull 
 private boolean ativo;
 @Column
 @Temporal(javax.persistence.TemporalType.DATE)
@@ -79,8 +79,6 @@ private boolean viewContasReceber;
 @Column
 @NotNull
 private boolean viewAdmSite;
-
-
 
     public Operador() {
     }
