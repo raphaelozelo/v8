@@ -29,7 +29,7 @@
             <p:spinner id="nivel" value="#{operadorMB.operadorView.nivel}" min="1" max="5" size="1" />
             <p:outputLabel for="email" value="e-Mail: "/>
             <p:inputText id="email" value="#{operadorMB.operadorView.email}">
-                 <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+                 <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"  />
             </p:inputText>
             <p:row>
             <p:fieldset legend=" Quadros de Avisos " >
@@ -43,7 +43,7 @@
             </p:row>
              <f:facet name="footer" >
                 <h:panelGroup style="display:block; text-align:center"  rendered="#{not operadorMB.isIsEditar()}">
-            <p:commandButton value="Confirma Novo Operador" action="#{operadorMB.addOperador}"/>
+                    <p:commandButton value="Confirma Novo Operador" action="#{operadorMB.addOperador}" validateClient="true"/>
             <p:spacer width="25"/>
             <p:commandButton value="Cancela A Inclusão" action="/adm/diretor/config/listOperador.xhtml?faces-redirect=true" immediate="true"/>
                 </h:panelGroup>

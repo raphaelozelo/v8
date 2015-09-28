@@ -26,6 +26,11 @@
             <version>5.2</version>
         </dependency>
         <dependency>
+   <groupId>org.primefaces.themes</groupId>
+   <artifactId>rio</artifactId>
+   <version>2.0.1</version>
+</dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>v8-ejb</artifactId>
             <version>${project.version}</version>
