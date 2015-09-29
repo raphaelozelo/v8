@@ -317,7 +317,7 @@
   content: "~";
 }
 .icon-fog-moon:before {
-  content: "\\";
+  content: "\0";
 }
 .icon-fog-sun:before {
   content: "\e000";
