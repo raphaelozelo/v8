@@ -7,101 +7,39 @@
     xmlns:pr="http://primefaces.org/rio">
 
     <div class="Animated05" id="layout-menu-cover">
-       
+        <ul class="layout-menu"></ul>
+        <div class="Separator"></div>
+        
         <pr:menu>
-            <p:menuitem id="rm_home" value="Inicial" icon="icon-home" outcome="/faces/adm/index.xhtml?faces-redirect=true"/>
+            <p:menuitem id="rm_home" value="Inicial" icon="icon-home" action="/faces/adm/index.xhtml?faces-redirect=true" />
             <p:submenu id="rm_veiculos" label="Veículos" icon="icon-car146">
-                <p:menuitem id="rm_list_est" value="Estoque Atual" icon="icon-list" outcome="/forms" />
-                <p:menuitem id="rm_add_veic" value="Novo Veículo" icon="icon-add" outcome="/data" />
+                <p:menuitem id="rm_list_est" value="Estoque Atual" icon="icon-list" url="#" />
+                <p:menuitem id="rm_add_veic" value="Novo Veículo" icon="icon-add" url="#"/>
                 <p:separator/>
-                <p:menuitem id="rm_arq_morto" value="Arquivo Morto" icon="fa-cubes" outcome="/datatable" />
+                <p:menuitem id="rm_arq_morto" value="Arquivo Morto" icon="fa fa-archive" url="#" />
                 <p:separator/>
-                <p:submenu id="rm_default" label="Multas" icon="icon-copy31">
-                <p:menuitem id="rm_empty" value="Listagem" icon="icon-list" outcome="/empty-page" />
-                <p:menuitem id="rm_login" value="Em Aberto" icon="fa-bullhorn" outcome="/login" />
+                <p:submenu id="rm_default" label="Multas" icon="traffic21">
+                <p:menuitem id="rm_empty" value="Listagem" icon="icon-list" url="#" />
+                <p:menuitem id="rm_login" value="Em Aberto" icon="fa fa-bullhorn" url="#" />
                 </p:submenu>
-               <p:submenu id="rm_clientes" label="Clientes" icon="fa-group">
-                <p:menuitem id="rm_empty" value="Listagem" icon="icon-list" outcome="/empty-page" />
-                <p:menuitem id="rm_login" value="Novo P.Física" icon="icon-add184" outcome="/login" />
-                <p:menuitem id="rm_error" value="Novo P.Jurídica" icon="fa-building-o" outcome="/error" />
-               </p:submenu>
+            </p:submenu>    
+            <p:submenu id="rm_clientes" label="Clientes" icon="fa fa-group">
+                <p:menuitem id="rm_listcli" value="Listagem" icon="icon-list" url="#" />
+                <p:menuitem id="rm_newpf" value="Novo P.Física" icon="icon-add184" url="#" />
+                <p:menuitem id="rm_newpj" value="Novo P.Jurídica" icon="fa fa-building-o" url="#" />
                 <p:separator/>
-                <p:menuitem id="rm_404" value="404 Page" icon="icon-close" outcome="/404" />
-                <p:menuitem id="rm_access" value="Access Denied Page" icon="icon-turn17" outcome="/access-denied" />
+                <p:menuitem id="rm_forn" value="Fornecedores" icon="fa fa-wrench" url="#" /> 
             </p:submenu>
-                
-                
-                <p:menuitem id="rm_panels" value="Panels" icon="icon-screen47 Fs16" outcome="/panel" />
-                <p:menuitem id="rm_overlays" value="Overlays" icon="icon-windows-1" outcome="/overlay" />
-                <p:menuitem id="rm_menus" value="Menus" icon="icon-link60 Fs16" outcome="/menu" />
-                <p:menuitem id="rm_messages" value="Messages" icon="icon-notifications1 Fs16" outcome="/messages" />
-                <p:menuitem id="rm_fileupload" value="FileUpload" icon="icon-task" outcome="/file" />
-                <p:menuitem id="rm_misc" value="Misc" icon="icon-nfc1" outcome="/misc" />
+            <p:submenu id="rm_pagar_rec" label="Contas Pagar/Receber" icon="fa fa-bank">
+                <p:menuitem id="rm_cp" value="À Pagar" icon="fa fa-barcode" url="#" />
+                <p:menuitem id="rm_cr" value="à Receber" icon="fa fa-money" url="#" />
             </p:submenu>
-            <p:submenu id="rm_default" label="Multas" icon="icon-copy31">
-                <p:menuitem id="rm_empty" value="Listagem" icon="icon-ipad" outcome="/empty-page" />
-                <p:menuitem id="rm_login" value="Em Aberto" icon="icon-in-alt" outcome="/login" />
-                <p:menuitem id="rm_error" value="Error Page" icon="icon-close" outcome="/error" />
-                <p:menuitem id="rm_404" value="404 Page" icon="icon-close" outcome="/404" />
-                <p:menuitem id="rm_access" value="Access Denied Page" icon="icon-turn17" outcome="/access-denied" />
+            <p:submenu id="rm_config" label="Configurações" icon="fa fa-gears">
+                <p:menuitem id="rm_mm" value="Marca/Modelo" icon="fa fa-ge" url="#" />
+                <p:menuitem id="rm_cadp" value="Cadrastro Próprio" icon="fa fa-file-powerpoint-o" url="#" />
             </p:submenu>
-            <p:submenu id="rm_hierarchy" label="Menu Hierarchy" icon="icon-share39">
-                <p:submenu id="rm_sm1" label="Submenu 1" icon="icon-folder215">
-                    <p:submenu id="rm_sm11" label="Submenu 1.1" icon="icon-folder215">
-                        <p:submenu id="rm_sm111" label="Submenu 1.1.1" icon="icon-folder215">
-                            <p:menuitem id="rm_lnk1111" value="Link 1" icon="icon-link60" url="#" />
-                            <p:menuitem id="rm_lnk1112" value="Link 2" icon="icon-link60" url="#" />
-                            <p:menuitem id="rm_lnk1113" value="Link 3" icon="icon-link60" url="#" />
-                        </p:submenu>
-                    </p:submenu>
-                </p:submenu>
-                <p:submenu id="rm_sm2" label="Submenu 2" icon="icon-folder215">
-                    <p:submenu id="rm_22" label="Submenu 2.2" icon="icon-folder215">
-                        <p:submenu id="rm_221" label="Submenu 2.2.1" icon="icon-folder215">
-                            <p:menuitem id="rm_lnk2211" value="Link 1" icon="icon-link60" url="#" />
-                            <p:menuitem id="rm_lnk2212" value="Link 2" icon="icon-link60" url="#" />
-                            <p:menuitem id="rm_lnk2213" value="Link 3" icon="icon-link60" url="#" />
-                        </p:submenu>
-                    </p:submenu>
-                </p:submenu>
-            </p:submenu>
-            <p:menuitem id="rm_icons" value="Font Icons" icon="icon-automatic2" outcome="/font-icons" />
-            
-            <p:submenu id="rm_docs" label="Documentation" icon="icon-receipt9">
-                <p:submenu id="rm_docs_core" label="Core CSS Docs" icon="fa fa-code">
-                    <p:menuitem id="rm_docs_1" value="Installation" icon="fa fa-book" outcome="/docs/core/installation" />
-                    <p:menuitem id="rm_docs_2" value="Menus" icon="fa fa-book" outcome="/docs/core/menus" />
-                    <p:menuitem id="rm_docs_3" value="Responsive Mode" icon="fa fa-book" outcome="/docs/core/responsive-mode" />
-                    <p:menuitem id="rm_docs_4" value="ContainerX" icon="fa fa-book" outcome="/docs/core/containerx" />
-                    <p:menuitem id="rm_docs_5" value="WidX" icon="fa fa-book" outcome="/docs/core/widx" />
-                    <p:menuitem id="rm_docs_6" value="Selection" icon="fa fa-book" outcome="/docs/core/selection" />
-                    <p:menuitem id="rm_docs_7" value="Visibility" icon="fa fa-book" outcome="/docs/core/visibilities" />
-                    <p:menuitem id="rm_docs_8" value="Displaying" icon="fa fa-book" outcome="/docs/core/displaying" />
-                    <p:menuitem id="rm_docs_9" value="Positioning" icon="fa fa-book" outcome="/docs/core/positioning" />
-                    <p:menuitem id="rm_docs_10" value="Underline" icon="fa fa-book" outcome="/docs/core/underline" />
-                    <p:menuitem id="rm_docs_11" value="Floating" icon="fa fa-book" outcome="/docs/core/floating" />
-                    <p:menuitem id="rm_docs_12" value="Overflows" icon="fa fa-book" outcome="/docs/core/overflows" />
-                    <p:menuitem id="rm_docs_13" value="Empty Boxes" icon="fa fa-book" outcome="/docs/core/empty-boxes" />
-                    <p:menuitem id="rm_docs_14" value="Opacity" icon="fa fa-book" outcome="/docs/core/opacity" />
-                    <p:menuitem id="rm_docs_15" value="Text Aligning" icon="fa fa-book" outcome="/docs/core/text-aligning" />
-                    <p:menuitem id="rm_docs_16" value="Box Sizing" icon="fa fa-book" outcome="/docs/core/box-sizing" />
-                    <p:menuitem id="rm_docs_17" value="Font Size" icon="fa fa-book" outcome="/docs/core/font-size" />
-                    <p:menuitem id="rm_docs_18" value="Font Weights" icon="fa fa-book" outcome="/docs/core/font-weights" />
-                    <p:menuitem id="rm_docs_19" value="Transitions" icon="fa fa-book" outcome="/docs/core/transitions" />
-                </p:submenu>
-                <p:submenu id="rm_docs_layout" label="Layout CSS Docs" icon="fa fa-code">
-                    <p:menuitem id="rm_docs_20" value="Less" icon="fa fa-book" outcome="/docs/layout/less" />
-                    <p:menuitem id="rm_docs_21" value="Cards" icon="fa fa-book" outcome="/docs/layout/cards" />
-                    <p:menuitem id="rm_docs_22" value="Text Colors" icon="fa fa-book" outcome="/docs/layout/text-colors" />
-                    <p:menuitem id="rm_docs_23" value="Background Colors" icon="fa fa-book" outcome="/docs/layout/background-colors" />
-                    <p:menuitem id="rm_docs_24" value="Borders" icon="fa fa-book" outcome="/docs/layout/borders" />
-                    <p:menuitem id="rm_docs_25" value="Separators" icon="fa fa-book" outcome="/docs/layout/separators" />
-                    <p:menuitem id="rm_docs_26" value="Effects" icon="fa fa-book" outcome="/docs/layout/effects" />
-                    <p:menuitem id="rm_docs_27" value="Roboto Font" icon="fa fa-book" outcome="/docs/layout/roboto-font" />
-                </p:submenu>
-            </p:submenu>
-            <p:separator />
-        </pr:menu>
+            <p:menuitem id="rm_sair" value="Log off" icon="fa fa-power-off" url="#"/>
+    </pr:menu>
 
     </div>
 
