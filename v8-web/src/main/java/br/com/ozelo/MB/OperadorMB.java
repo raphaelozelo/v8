@@ -131,9 +131,9 @@ public class OperadorMB extends BaseMB{
             operadorLogado.setDtAcessoAtual(new Date());
             operadorService.atualizaOperador(operadorLogado);
             if (operadorLogado.getSexo().equals("M")){
-                userIcon = "/resources/img/icon/UserMasc.png"; 
+                userIcon = "icon/userMasc.svg"; 
             } else{                   
-            userIcon = "/resources/img/icon/UserFem.png";
+            userIcon = "icon/userFem.svg";
             }
             fabricarLog(operadorLogado, 1, "Operador Logou o Acesso de nº "+i, null);
             return INDEX_PAGE;
@@ -187,14 +187,11 @@ public class OperadorMB extends BaseMB{
    return null;
   }
   
-  public String acessosOperador(){
-    String str = "Acesso nº: "+operadorLogado.getNrAcessos();
-if (operadorLogado.getDtUltAcesso()!=null){
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-    str = str+" - Último: "+sdf.format(operadorLogado.getDtUltAcesso());
+  public String ultimoAcessoOperador(){
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy  HH:mm");
+    return sdf.format(operadorLogado.getDtUltAcesso());
   }
-return str;
-  }
+  
     public Operador buscaOperadorId (int id){
       return  operadorService.getOperadorById(id);
     } 

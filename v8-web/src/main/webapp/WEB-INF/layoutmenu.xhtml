@@ -4,10 +4,37 @@
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:p="http://primefaces.org/ui"
-    xmlns:pr="http://primefaces.org/rio">
+    xmlns:pr="http://primefaces.org/rio"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <div class="Animated05" id="layout-menu-cover">
-        <ul class="layout-menu"></ul>
+       <ul class="layout-menu">
+            <li>
+                <a class="menulink ripplelink">
+                    <p:graphicImage name="#{operadorMB.userIcon}" library="img" class="Fs40"/>
+                    <span class="Fs18">#{operadorMB.nomeSobrenome(operadorMB.operadorLogado.nome)}<i class="icon-downwards Fright Fs20"></i><br /><span class="Fs12 FontRobotoLight">#{operadorMB.operadorLogado.apelido}  |  #{operadorMB.operadorLogado.funcao}</span></span>
+                    <br /><i class="fa fa-history Fs12"></i><span class="Fs12 FontRobotoLight"> #{operadorMB.ultimoAcessoOperador()} | nº #{operadorMB.operadorLogado.nrAcessos}</span>
+                </a>
+                <ul>
+                    <li><a href="#" class="menulink ripplelink"><i class="fa fa-thumb-tack Fs16"></i> Lembretes</a></li>
+                    <li><a href="#" class="menulink ripplelink"><i class="fa fa-calendar Fs16"></i> Agenda</a></li>
+                    <c:if test="#{operadorMB.operadorLogado.viewPendenciaVeic}">
+                    <li><a href="#" class="menulink ripplelink"><i class="fa fa-bullhorn Fs16"></i> Pendências Veículos</a></li>
+                    </c:if>
+                    <c:if test="#{operadorMB.operadorLogado.viewAdmSite}">
+                    <li><a href="#" class="menulink ripplelink"><i class="icon-virtual2 Fs16"></i> Pendências Site Loja</a></li>
+                    </c:if>
+                    <c:if test="#{operadorMB.operadorLogado.viewContasPagar}">
+                    <li><a href="#" class="menulink ripplelink"><i class="fa fa-barcode Fs16"></i> Contas À Pagar</a></li>
+                    </c:if>
+                    <c:if test="#{operadorMB.operadorLogado.viewContasReceber}">
+                    <li><a href="#" class="menulink ripplelink"><i class="fa fa-money Fs16"></i> Contas À Receber</a></li>
+                    </c:if>
+                    <li><a href="#" class="menulink ripplelink"><i class="fa fa-file-powerpoint-o Fs16"></i> Cadastro Próprio</a></li>
+                    <li><a href="#" class="menulink ripplelink"><i class="fa fa-power-off Fs16"></i> Logout</a></li>
+                </ul>
+            </li>
+        </ul>
         <div class="Separator"></div>
         
         <pr:menu>
@@ -38,7 +65,7 @@
                 <p:menuitem id="rm_mm" value="Marca/Modelo" icon="fa fa-ge" url="#" />
                 <p:menuitem id="rm_cadp" value="Cadrastro Próprio" icon="fa fa-file-powerpoint-o" url="#" />
             </p:submenu>
-            <p:menuitem id="rm_sair" value="Log off" icon="fa fa-power-off" url="#"/>
+            <p:menuitem id="rm_sair" value="Logout" icon="fa fa-power-off" url="#"/>
     </pr:menu>
 
     </div>

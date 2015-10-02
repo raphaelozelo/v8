@@ -65,4 +65,12 @@ public abstract class BaseMB implements java.io.Serializable {
             log.setOperadorAfetado(operadorAfetado);
         log4OzeloService.novolog4Ozelo(log);
     }
+    
+     public String nomeSobrenome(String nomeCompleto){
+       if (nomeCompleto == null) return null;
+       String[] s = nomeCompleto.trim().split(" ");  
+       String retorno = s[0];
+       if (s.length > 0) retorno=retorno+" "+s[s.length-1];  
+       return retorno;
+     }
 }
