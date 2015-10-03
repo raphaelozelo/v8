@@ -5,6 +5,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class OperadorDao extends BasicDao {
     
@@ -86,5 +87,10 @@ public class OperadorDao extends BasicDao {
         }
         return digest;
     }   
+
+    public List<Operador> getAniversariantes() {
+         Date hoje = new Date();
+         return getPureList(Operador.class, "select o from Operador o where o.dtNasc =?1", hoje );
+    }
 
 }

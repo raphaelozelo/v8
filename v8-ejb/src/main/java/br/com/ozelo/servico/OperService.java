@@ -83,4 +83,8 @@ public class OperService extends BasicService{
     public Operador getOperadorByApelido (String apelido){
 return operadorDao.getOperadorByApelido(apelido);
     }
+    
+    public List<Operador> getAniversariantes(){
+        return operadorDao.getAniversariantes();
+    }
 }
