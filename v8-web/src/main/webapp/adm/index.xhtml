@@ -9,3 +9,27 @@
     </ui:define>
 
 </ui:composition>
+
+
+
+ <div class="Container50 Responsive50">
+            <div class="ContainerIndent">
+                <div class="Card ShadowEffect  ">
+                    <div class="Container100">
+                        <div class="ContainerIndent">
+                            <h2 class="BigTopic">Aniversariantes do Dia</h2>
+                            <h:form id="form1">
+                                <p:dataGrid var="operador" value="#{operadorMB.aniversariantes}" columns="3" layout="grid" id="anivGrid">
+                                        <h:panelGrid columns="1" style="width:100%">
+                                            <h:outputText value="#{operador.nome}" styleClass="Fs18 FontRalewaySemiBold"/>
+
+                                            <h:outputText value="#{car.year}" />
+
+                                        </h:panelGrid>
+                                </p:dataGrid>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

@@ -4,6 +4,7 @@ import br.com.ozelo.entidades.Operador;
 import br.com.ozelo.servico.OperService;
 import java.security.MessageDigest;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
@@ -50,9 +51,24 @@ public class OperadorMB extends BaseMB{
     private List<Operador> operadoresAtivos;
     private List<Operador> operadoresInativos;
     private List<Operador> operadoresApelidos;
-
+    private List<Operador> aniversariantes;
+    private Boolean euAniversariante = false;
+    private List <Integer> nAlertas = new ArrayList();
+    private List <String> cssAlertas = new ArrayList(); 
+    
     public OperadorMB() {
     }
+    
+    // [0] Lembretes, [1] Agenda,[2]Pendecias Veículos
+    // [3] Pendencias Site, [4] Contas À Pagar, [5] À Receber
+    public void contarAlertas(){
+      nAlertas = operadorService.getAlertas(operadorLogado);
+      for (Integer i=0; i < nAlertas.size(); i++){
+        if (nAlertas.get(i)>0){ cssAlertas.add("animated swing infinite");
+        }else{cssAlertas.add("");
+        }
+      }
+       }
     
     @SuppressWarnings("empty-statement")
     public String doEditarAtivo(){
@@ -136,7 +152,10 @@ public class OperadorMB extends BaseMB{
             userIcon = "icon/userFem.svg";
             }
             fabricarLog(operadorLogado, 1, "Operador Logou o Acesso de nº "+i, null);
-            return INDEX_PAGE;
+            aniversariantes = operadorService.getAniversariantes();
+            euAniversariante = aniversariantes.contains(operadorLogado);
+            contarAlertas();
+           return INDEX_PAGE;
         }
     }  
 
@@ -305,7 +324,47 @@ public class OperadorMB extends BaseMB{
     public void setUserIcon(String userIcon) {
         this.userIcon = userIcon;
     }    
-    
+
+    public List<Operador> getAniversariantes() {
+        return aniversariantes;
+    }
+
+    public void setAniversariantes(List<Operador> aniversariantes) {
+        this.aniversariantes = aniversariantes;
+    }
+
+    public OperService getOperadorService() {
+        return operadorService;
+    }
+
+    public void setOperadorService(OperService operadorService) {
+        this.operadorService = operadorService;
+    }
+
+    public Boolean getEuAniversariante() {
+        return euAniversariante;
+    }
+
+    public void setEuAniversariante(Boolean euAniversariante) {
+        this.euAniversariante = euAniversariante;
+    }
+
+    public List<Integer> getnAlertas() {
+        return nAlertas;
+    }
+
+    public void setnAlertas(List<Integer> nAlertas) {
+        this.nAlertas = nAlertas;
+    }
+
+    public List<String> getCssAlertas() {
+        return cssAlertas;
+    }
+
+    public void setCssAlertas(List<String> cssAlertas) {
+        this.cssAlertas = cssAlertas;
+    }
+
     public String getMd5(String message) {
         String digest = null;
         try {
