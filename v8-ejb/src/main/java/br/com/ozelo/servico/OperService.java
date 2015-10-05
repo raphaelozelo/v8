@@ -2,6 +2,7 @@ package br.com.ozelo.servico;
 
 import br.com.ozelo.DAO.OperadorDao;
 import br.com.ozelo.entidades.Operador;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.LocalBean;
@@ -86,5 +87,9 @@ return operadorDao.getOperadorByApelido(apelido);
     
     public List<Operador> getAniversariantes(){
         return operadorDao.getAniversariantes();
+    }
+    
+    public List<Integer> getAlertas (Operador operadorLogado){
+        return operadorDao.getAlertas(operadorLogado);
     }
 }

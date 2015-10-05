@@ -1,11 +1,12 @@
 package br.com.ozelo.DAO;
 
+import br.com.ozelo.entidades.Lembrete;
 import br.com.ozelo.entidades.Operador;
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.security.MessageDigest;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class OperadorDao extends BasicDao {
     
@@ -89,8 +90,21 @@ public class OperadorDao extends BasicDao {
     }   
 
     public List<Operador> getAniversariantes() {
-         Date hoje = new Date();
-         return getPureList(Operador.class, "select o from Operador o where o.dtNasc =?1", hoje );
+        LocalDate hoje = LocalDate.now();
+        return getPureList(Operador.class, "select o from Operador o where o.ativo = true and Extract('Day' From o.dtNasc)=?1 and Extract('Month' From o.dtNasc)=?2",
+            hoje.getDayOfMonth(),hoje.getMonthValue());
     }
-
+    
+// [0] Lembretes, [1] Agenda,[2]Pendecias Veículos
+    // [3] Pendencias Site, [4] Contas À Pagar, [5] À Receber
+    public List<Integer> getAlertas (Operador operadorLogado){
+        List <Integer> listaAlertas = new ArrayList<>();
+        listaAlertas.add(getPureList(Lembrete.class, "select l from Lembrete l where l.operador_id = ?1", operadorLogado.getId()).size());
+        listaAlertas.add(0);
+        listaAlertas.add(0);
+        listaAlertas.add(0);
+        listaAlertas.add(0);
+        listaAlertas.add(0);
+       return listaAlertas;
+    }
 }
