@@ -1,0 +1,7 @@
+.alertBubble{background-color:#e90c45;
+            color:#ffffff;
+            overflow:hidden;
+            padding:3px 4px;
+            display:inline-block;
+            position:absolute;
+            margin-top:-5px;}

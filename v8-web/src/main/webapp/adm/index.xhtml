@@ -17,6 +17,7 @@
                             <h:form id="formAniversario">
                                 <p:dataGrid var="operador" value="#{operadorMB.aniversariantes}" columns="3" layout="grid" id="anivGrid">
                                         <h:panelGrid columns="1" style="width:100%">
+                                            <p:graphicImage name="graficos/boloAniversario120.png" style="width: 120px;" library="rio-layout" />
                                             <h:outputText value="#{operadorMB.nomeSobrenome(operador.nome)}" styleClass="Fs18 FontRalewaySemiBold"/>
 
                                             <h:outputText value="#{operadorMB.idade(operador.dtNasc)} Anos!" />

@@ -9,7 +9,7 @@
     
     <div id="layout-topbar">
     	<div id="logo" class="Fleft">
-        	<a href="www.ozelo.com.br"><h:graphicImage name="images/ozelo.svg" styleClass="Fleft" library="rio-layout" /></a>
+            <a href="www.ozelo.com.br"><h:graphicImage name="images/ozelo.svg" styleClass="Fleft" library="rio-layout" /></a>
             <a id="mobile-menu-button" class="Fright ShowOnMobile ripplelink Unselectable ShadowEffect"><i class="icon-add186"></i></a>
         </div>
         
@@ -17,28 +17,43 @@
         
         <ul id="top-menu" class="ShowOnDesktop">
             <li>
+                <c:if test="#{operadorMB.nAlertas.get(0) ne 0}">
+                    <span class="alertBubble BordRad10 Fs9">#{operadorMB.nAlertas.get(0)}</span></c:if>
                 <a class="ripplelink" title="Lembretes"><i class="fa fa-thumb-tack #{operadorMB.cssAlertas.get(0)}" ></i></a>
+            </li>
             <li>
-                <a class="ripplelink" title="Agenda"><i class="fa fa-calendar #{operadorMB.cssAlertas.get(1)}"></i></a>
+                <c:if test="#{operadorMB.nAlertas.get(1) ne 0}">
+                    <span class="alertBubble BordRad10 Fs9">#{operadorMB.nAlertas.get(1)}</span></c:if>
+                <a class="ripplelink" title="Agenda"><i class="fa fa-calendar #{operadorMB.cssAlertas.get(1)}}  "></i></a>
             </li>
         <c:if test="#{operadorMB.operadorLogado.viewPendenciaVeic}">
             <li>
+                <c:if test="#{operadorMB.nAlertas.get(2) ne 0}">
+                    <span class="alertBubble BordRad10 Fs9">#{operadorMB.nAlertas.get(2)}</span></c:if>
                 <a class="ripplelink" title="Pendências Veículos"><i class="fa fa-bullhorn #{operadorMB.cssAlertas.get(2)}"></i></a>
             </li>
         </c:if>
             <c:if test="#{operadorMB.operadorLogado.viewAdmSite}">    
              <li>
+              <c:if test="#{operadorMB.nAlertas.get(3) ne 0}">
+                    <span class="alertBubble BordRad10 Fs9">#{operadorMB.nAlertas.get(3)}</span></c:if>   
                 <a class="ripplelink" title="Pendências Site Loja"><i class="icon-virtual2 #{operadorMB.cssAlertas.get(3)}"></i></a>
              </li>
             </c:if>
             <c:if test="#{operadorMB.operadorLogado.viewContasPagar}">
-                        <li>
+             <li>
+             <c:if test="#{operadorMB.nAlertas.get(4) ne 0}">
+                    <span class="alertBubble BordRad10 Fs9">#{operadorMB.nAlertas.get(4)}</span></c:if>               
                 <a class="ripplelink" title="Contas À Pagar"><i class="fa fa-barcode #{operadorMB.cssAlertas.get(4)}"></i></a>
             </li>
             </c:if>
             <c:if test="#{operadorMB.operadorLogado.viewContasReceber}">
-                        <li>
-                <a href="#" class="ripplelink" title="Contas À Receber"><i class="fa fa-money #{operadorMB.cssAlertas.get(5)}"></i></a></li>
+                 <li>
+              <c:if test="#{operadorMB.nAlertas.get(5) ne 0}">
+                    <span class="alertBubble BordRad10 Fs9">#{operadorMB.nAlertas.get(5)}</span></c:if>       
+                <a href="#" class="ripplelink" title="Contas À Receber"><i class="fa fa-money #{operadorMB.cssAlertas.get(5)}"></i></a>
+               </li>
+             
             </c:if>
         </ul>
     </div>
