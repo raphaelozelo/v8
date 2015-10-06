@@ -62,6 +62,7 @@ public class OperadorMB extends BaseMB{
     // [0] Lembretes, [1] Agenda,[2]Pendecias Veículos
     // [3] Pendencias Site, [4] Contas À Pagar, [5] À Receber
     public void contarAlertas(){
+        System.out.println("operador ja logou  "+operadorLogado.getId());
       nAlertas = operadorService.getAlertas(operadorLogado);
       for (Integer i=0; i < nAlertas.size(); i++){
         if (nAlertas.get(i)>0){ cssAlertas.add("animated swing infinite");

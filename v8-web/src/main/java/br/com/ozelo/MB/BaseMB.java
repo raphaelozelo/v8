@@ -5,6 +5,8 @@ import br.com.ozelo.entidades.Operador;
 import br.com.ozelo.servico.Log4OzeloService;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Set;
 import java.util.Date;
 import javax.ejb.EJB;
@@ -72,5 +74,13 @@ public abstract class BaseMB implements java.io.Serializable {
        String retorno = s[0];
        if (s.length > 0) retorno=retorno+" "+s[s.length-1];  
        return retorno;
+     }
+     
+     public Integer idade(Date dtNascimento){
+         Calendar cal = Calendar.getInstance();  
+         cal.setTime(dtNascimento);  
+         Integer ano = cal.get(Calendar.YEAR); 
+         cal = Calendar.getInstance(); 
+         return cal.get(Calendar.YEAR)-ano;
      }
 }

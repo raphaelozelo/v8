@@ -2,28 +2,24 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="/WEB-INF/template.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="content">
-          <ui:insert name="content"/>
-    </ui:define>
-
-</ui:composition>
-
-
-
+<c:if test="#{operadorMB.aniversariantes.size()> 0}" >       
  <div class="Container50 Responsive50">
             <div class="ContainerIndent">
                 <div class="Card ShadowEffect  ">
                     <div class="Container100">
                         <div class="ContainerIndent">
                             <h2 class="BigTopic">Aniversariantes do Dia</h2>
-                            <h:form id="form1">
+                            <h:form id="formAniversario">
                                 <p:dataGrid var="operador" value="#{operadorMB.aniversariantes}" columns="3" layout="grid" id="anivGrid">
                                         <h:panelGrid columns="1" style="width:100%">
-                                            <h:outputText value="#{operador.nome}" styleClass="Fs18 FontRalewaySemiBold"/>
+                                            <h:outputText value="#{operadorMB.nomeSobrenome(operador.nome)}" styleClass="Fs18 FontRalewaySemiBold"/>
 
-                                            <h:outputText value="#{car.year}" />
+                                            <h:outputText value="#{operadorMB.idade(operador.dtNasc)} Anos!" />
 
                                         </h:panelGrid>
                                 </p:dataGrid>
@@ -33,3 +29,10 @@
                 </div>
             </div>
         </div>
+  </c:if>
+        
+        
+        
+            </ui:define>
+
+</ui:composition>
