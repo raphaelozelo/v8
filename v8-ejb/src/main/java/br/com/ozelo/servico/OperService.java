@@ -89,7 +89,7 @@ return operadorDao.getOperadorByApelido(apelido);
         return operadorDao.getAniversariantes();
     }
     
-    public List<Integer> getAlertas (Operador operadorLogado){
-        return operadorDao.getAlertas(operadorLogado);
+    public List<Integer> getAlertas (Operador operador){
+        return operadorDao.getAlertas(operador);
     }
 }
