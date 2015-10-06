@@ -99,7 +99,7 @@ public class OperadorDao extends BasicDao {
     // [3] Pendencias Site, [4] Contas À Pagar, [5] À Receber
     public List<Integer> getAlertas (Operador operadorLogado){
         List <Integer> listaAlertas = new ArrayList<>();
-        listaAlertas.add(getPureList(Lembrete.class, "select l from Lembrete l where l.operador_id = ?1", operadorLogado.getId()).size());
+        listaAlertas.add((Integer) getPureList(Lembrete.class, "select l from Lembrete l where l.operador_id = ?1", operadorLogado.getId()).size());
         listaAlertas.add(0);
         listaAlertas.add(0);
         listaAlertas.add(0);
