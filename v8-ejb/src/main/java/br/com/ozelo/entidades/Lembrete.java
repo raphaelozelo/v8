@@ -42,6 +42,15 @@ public class Lembrete implements Serializable {
     public Lembrete() {
     }
 
+     public String dataEventoPTBR() {
+      SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");  
+        return sdf.format(dataEvento);  
+    }
+    public String dataEventoPTBRSmall() {
+      SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");  
+        return sdf.format(dataEvento);  
+    }
+ 
     public Integer getId() {
         return id;
     }
