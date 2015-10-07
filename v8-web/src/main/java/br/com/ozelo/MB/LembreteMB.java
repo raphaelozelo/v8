@@ -31,6 +31,27 @@ public class LembreteMB extends BaseMB{
         
     }
 
+    public void startLembretes(){
+        novoLembrete();
+        lembreteSelecionado.setDescricao("Teste 1 dos Lembretes atuais para operador 1");
+        addLembrete();
+        lembreteSelecionado.setDescricao("Teste 2 dos Lembretes atuais para operador 1");
+        addLembrete();
+        lembreteSelecionado.setDescricao("Teste 3 dos Lembretes atuais para operador 1");
+        addLembrete();
+        lembreteSelecionado.setDescricao("Teste 4 dos Lembretes atuais para operador 1");
+        addLembrete();
+        lembreteSelecionado.setDescricao("Teste 5 dos Lembretes atuais para operador 1");
+        addLembrete();
+        lembreteSelecionado.setDescricao("Teste 6 dos Lembretes atuais para operador 1");
+        addLembrete();
+        lembreteSelecionado.setDescricao("Teste 7 dos Lembretes atuais para operador 1");
+        addLembrete();
+        lembreteSelecionado.setDescricao("Teste 8 dos Lembretes atuais para operador 1");
+        addLembrete();
+        
+    }
+    
     public void cleanCash(){
     lembreteSelecionado = null;
     lembretes = null;
