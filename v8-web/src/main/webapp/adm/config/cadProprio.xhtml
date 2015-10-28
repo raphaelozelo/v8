@@ -8,38 +8,62 @@
     
     <ui:define name="conteudo">
         <h:form>
-        <p:panelGrid columns="2" >
-            <f:facet name="header">Cadastro Próprio</f:facet>
-            <p:outputLabel for="id" value="Id:"/>
-            <p:outputLabel id="id" value="#{operadorMB.operadorLogado.id}" class="labelStrong"/>
-            <p:outputLabel for="apelido" value="Apelido:"/>
-            <p:outputLabel id="apelido" value="#{operadorMB.operadorLogado.apelido}" class="labelStrong"/>
-            <p:outputLabel for="nome" value="Nome:"/>
-            <p:outputLabel id="nome" value="#{operadorMB.operadorLogado.nome}" class="labelStrong" />
-            <p:outputLabel for="nrAcesso" value="Nº Acessos:"/>
-            <p:outputLabel id="nrAcesso" value="#{operadorMB.operadorLogado.nrAcessos}" class="labelStrong"/>
-            <p:outputLabel for="ulAcesso" value="Último Acesso:"/>
-            <p:outputLabel id="ulAcesso" value="#{operadorMB.operadorLogado.dtUltAcesso}" class="labelStrong">
-              <f:convertDateTime locale="pt" dateStyle="long" pattern="dd/MM/yyyy  HH:mm" /></p:outputLabel>
-            <p:outputLabel value=""/> <p:outputLabel value=""/>
-            <p:outputLabel for="dtNasc" value="Dt.Nascimento:" />
-            <p:calendar id="dtNasc" locale="pt_BR" navigator="true" pattern="dd/MM/YYYY" value="#{operadorMB.operadorLogado.dtNasc}"/>
-            <p:outputLabel for="sexo" value="Sexo:"/>
-                <p:selectOneRadio id="sexo" value="#{operadorMB.operadorLogado.sexo}" >
-                  <f:selectItem itemLabel="Fem." itemValue="F" />
-                  <f:selectItem itemLabel="Masc." itemValue="M" />
-                </p:selectOneRadio>         
-            <p:outputLabel for="email" value="e-Mail:"/>
-            <p:inputText id="email" value="#{operadorMB.operadorLogado.email}" validatorMessage="e-Mail Inválido!" style="width: 285px;">
-            <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
-            </p:inputText>
-            <p:commandButton value="Trocar a Senha" action="/adm/config/trocaSenha.faces?faces-redirect=true"/><p:outputLabel value=""/>
-            <f:facet name="footer" >
-            <p:commandButton value="Confirma Edição" action="#{operadorMB.editaProprio}"/>
-            <p:spacer width="10"/>
-            <p:commandButton value="Cancela Edição" action="/adm/index.faces?faces-redirect=true" immediate="true"/>
-            </f:facet>       
-        </p:panelGrid>
+            <div class="Container70">
+            <div class="ContainerIndent">
+                <div class="Card ShadowEffect  ">
+                    <div class="Container70">
+                        <div class="ContainerIndent">
+                            <h2 class="BigTopic">Cadastro Próprio</h2>
+                            <p:messages/>
+                                <h:panelGrid columns="1" cellpadding="5">
+                                    <p:outputLabel for="codigo:" value="Id.:" />
+                                    <p:outputLabel value="#{operadorMB.operadorLogado.id}" id="codigo:" class="strongLabel"/>
+
+                                    <p:outputLabel for="apelido:" value="Apelido:" />
+                                    <p:outputLabel value="#{operadorMB.operadorLogado.apelido}" id="apelido:" class="strongLabel"/>
+
+                                    <p:outputLabel for="nome:" value="Nome:" />
+                                    <p:outputLabel value="#{operadorMB.operadorLogado.nome}" id="nome:" class="strongLabel"/>
+
+                                    
+                                    <p:outputLabel for="funcao:" value="Função:" />
+                                    <p:outputLabel value="#{operadorMB.operadorLogado.funcao}" id="funcao:" class="strongLabel"/>
+
+                                    <p:outputLabel for="nacesso:" value="Nr. Acessos:" />
+                                    <p:outputLabel value="#{operadorMB.operadorLogado.nrAcessos}" id="nacesso:" class="strongLabel"/>
+
+                                    <p:outputLabel for="ulAcesso" value="Último Acesso:"/>
+                                    <p:outputLabel id="ulAcesso" value="#{operadorMB.operadorLogado.dtUltAcesso}" class="strongLabel">
+                                    <f:convertDateTime locale="pt" dateStyle="long" pattern="dd/MM/yyyy  HH:mm" /></p:outputLabel>
+                                    
+                                    <p:outputLabel for="dtNasc" value="Data Nascimento:" />
+                                    <p:calendar id="dtNasc" locale="pt_BR" navigator="true" pattern="dd/MM/YYYY" value="#{operadorMB.operadorLogado.dtNasc}"/>
+            
+                                    <p:outputLabel for="sexo" value="Sexo:"/>
+                                    <p:selectOneRadio id="sexo" value="#{operadorMB.operadorLogado.sexo}" >
+                                    <f:selectItem itemLabel="Fem." itemValue="F" />
+                                    <f:selectItem itemLabel="Masc." itemValue="M" />
+                                    </p:selectOneRadio>         
+                                    
+                                    <p:outputLabel for="email" value="e-Mail:"/>
+                                    <p:inputText id="email" value="#{operadorMB.operadorLogado.email}" validatorMessage="e-Mail Inválido!" >
+                                    <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+                                    </p:inputText>
+            
+                                    <p:commandButton value="Trocar a Senha" action="/adm/config/trocaSenha.faces?faces-redirect=true"/>
+                                     <f:facet name="footer" >
+                                     <p:commandButton value="Confirma Edição" action="#{operadorMB.editaProprio}"/>
+                                     <p:spacer width="10"/>
+                                    <p:commandButton value="Cancela Edição" action="/adm/index.faces?faces-redirect=true" immediate="true"/>
+                                    </f:facet> 
+                                </h:panelGrid>
+                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                    
         </h:form>
     </ui:define>
 

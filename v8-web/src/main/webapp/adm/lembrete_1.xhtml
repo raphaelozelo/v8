@@ -1,85 +1,51 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="./baseFace.xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ozeloComp="http://xmlns.jcp.org/jsf/composite/componentes">
     
-    <ui:define name="conteudo">
-
-        <h:form>
- <p:commandLink   action="#{lembreteMB.novoLembrete()}" oncomplete="PF('novoLembreteDialog').show();"   >
-          <h:graphicImage value="/resources/img/lembrete/novoLembrete.png" class="buttonRedondo" />
-        </p:commandLink>
-            <p:dataGrid id="lembreteTable" var="lembrete" value="#{lembreteMB.lembretes}" columns="4"
-                 class="lembreteGrid" emptyMessage="Nenhum Lembrete para Você!" >
- 
-             <p:panel style="text-align:center" class="lembrete" style="background-color: #{lembrete.backColor}">
-            <h:panelGroup>
-                <ozeloComp:alertaLembrete valueAlert="#{lembrete.nivel}" style="float: left;"/>
-                <h:outputLabel value="#{lembrete.dataEventoPTBR}" style="float: right">
-                    <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+3"/>
-                </h:outputLabel>
-            </h:panelGroup>
-              
-                <h:outputText value="#{lembrete.descricao}" style="width: 95%; height: 160px;"/>
- 
-             </p:panel>
- 
-    </p:dataGrid>
-            
-            
-            
-          
-    </h:form>          
-    <h:form>
-    <p:dialog id="formLembrete" widgetVar="novoLembreteDialog" header="Novo Lembrete" resizable="false"
-                      dynamic="true" showEffect="clip" hideEffect="clip"  >
-         <p:messages id="lembretePanel" />
-                <h:panelGrid columns="1" >
+      <h:form>
+        <p:dialog id="lembreteView" widgetVar="lembreteDialog" resizable="false" closable="false"
+                  dynamic="true" showEffect="clip" hideEffect="clip" 
+                  style="background-color: #{lembreteMB.lembreteSelecionado.corCss}; height: 280px; width: 260px"  >
+         <p:messages  />
+         <h:panelGrid columns="1" >
           <h:panelGroup>
-          <ozeloComp:alertaLembrete valueAlert="#{lembreteMB.lembreteSelecionado.nivel}" id="nivelImg" onClick="#{lembreteMB.changeNivel()}"
-                                    style="float: left;"/>
-        <h:panelGroup style="float: right">
-            <h:outputLabel for ="inputCor" value="Cor: "/>
-        <h:selectOneMenu id="inputCor" value="#{lembreteMB.lembreteSelecionado.cor}"  > 
-            <p:ajax event="change" update="textoLembrete" listener="#{lembreteMB.changeColor()}" />
-            <f:converter converterId="IntegerConversor"/>
-            <f:selectItem itemValue="1" itemLabel=" HighLight" />
-            <f:selectItem itemValue="2" itemLabel=" Azul" />
-            <f:selectItem itemValue="3" itemLabel=" Verde"/>
-            <f:selectItem itemValue="4" itemLabel=" Rosa" />
-            <f:selectItem itemValue="5" itemLabel=" Laranja" />
-         </h:selectOneMenu>
-        </h:panelGroup>
-        </h:panelGroup>
-        <h:panelGroup>
-        <h:outputLabel for="inputOper" value="Lembrar para: " />
-        <p:selectOneMenu id="inputOper" value="#{lembreteMB.lembreteSelecionado.operador}" converter="OperadorApelidoConverter" > 
-            <f:selectItems value="#{lembreteMB.operadorMB.operadoresApelidos}" var="operador"  itemLabel="#{operador.apelido}" itemValue="#{operador}" itemDescription="#{operador.apelido}" />
-        </p:selectOneMenu>
-        </h:panelGroup>           
-        <p:inputTextarea id="textoLembrete" value="#{lembreteMB.lembreteSelecionado.descricao}" cols="45" rows="10"
-                         label="Texto" style="font-size: large; background-color: #{lembreteMB.corFundo}" required="true" />
-<p:commandLink action="#{lembreteMB.addLembrete()}" update="lembretePanel" oncomplete="existeErro(args)" style="float: left;" >
+            <h:graphicImage name="/img/alerta1.svg" library="ozelo" rendered="#{lembrete.nivel.toString() eq '1'}" style="float: left; width: 6%"/>
+            <h:graphicImage  name="/img/alerta2.svg" library="ozelo" rendered="#{lembrete.nivel.toString() eq '2'}" style="float: left; width: 13%"/>
+            <h:graphicImage  name="/img/alerta3.svg" library="ozelo" rendered="#{lembrete.nivel.toString() eq '3'}" style="float: left; width: 13%" class="animated tada infinite"/>
+           <h:outputLabel value="#{lembrete.dataEventoPTBR}" style="float:right; text-align:right; font-size:smaller"/>
+        </h:panelGroup>     
+             <h:outputLabel value="Lembrar que:" rendered="#{lembreteMB.lembreteSelecionado.operador eq lembreteMB.lembreteSelecionado.operadorIndicou}"/>
+             <h:outputLabel value="#{lembreteMB.lembreteSelecionado.operadorIndicou.apelido} Lembrou que Você Têm:" style="text-transform: capitalize"
+                            rendered="#{lembreteMB.lembreteSelecionado.operador ne lembreteMB.lembreteSelecionado.operadorIndicou}"/>
+             <p:inputTextarea value="#{lembreteMB.lembreteSelecionado.descricao}" autoResize="false" style="background-color: #{lembreteMB.lembreteSelecionado.corCss}; font-size: large;" />
+             <h:panelGroup>
+                 <p:commandLink action="#{lembreteMB.deleteLembrete()}"  oncomplete="existeErro(args)" style="float: left;" >
+    <h:graphicImage url="/resources/img/lembrete/btExcluir.png" class="buttonRedondo" />
+</p:commandLink> 
+                 <p:button icon="fa fa-trash Fs16 White" styleClass="RedButton"/>      
+                 <p:spacer width="30"/>                 
+<p:commandLink action="#{lembreteMB.okLembrete()}" update="lembretePanel" oncomplete="existeErro(args)" style="float: left;" >
     <h:graphicImage url="/resources/img/lembrete/pinOk.png" class="buttonRedondo" />
-</p:commandLink>
-                </h:panelGrid>  
-    </p:dialog>    
-        </h:form>
-         
-    </ui:define>
-<script>        
-            function existeErro(args) {
-		if (!args.validationFailed) {
-			novoLembreteDialog.hide();
-		}
-	}
-	
-</script>  
+</p:commandLink>    
+           <p:button icon="fa fa-thumb-tack Fs16 White" />      
+        </h:panelGroup>             
+         </h:panelGrid>      
+             
+    </p:dialog>
+          
+          <h:outputLabel value="#{lembrete.descricao}"  escape="false" 
+              style="width: 175px; height: 120px; display: block; overflow: hidden; text-overflow:ellipsis; " />           
+                 
+    </h:form>
 </ui:composition>
   
     
-    
+    .flx-full-width {
+   box-sizing: border-box;
+   padding: 10px 25px 13px 100px;
+   margin-bottom: 20px;
+}
+

@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+      <p:dataGrid id="lembreteTable" var="lembrete" value="#{lembreteMB.lembretes}" columns="1"
+                 rows="6" layout="grid" emptyMessage="Nenhum Lembrete para Você!" >
+    <div onclick="PF('lembreteDialog').show();" > 
+             <p:commandLink action="#{lembreteMB.cashLembrete()}" oncomplete="PF('lembreteDialog').show();" >
+                    <f:setPropertyActionListener value="#{lembrete}" target="#{lembreteMB.lembreteSelecionado}" />        
+                <p:panel  class="lembrete" style="background-color: #{lembrete.corCss}; height:160px;">
+                <h:panelGroup style="width: 100%">
+                <h:graphicImage name="/img/alerta1.svg" library="ozelo" rendered="#{lembrete.nivel.toString() eq '1'}" style="float:left; width:8%" />
+                <h:graphicImage  name="/img/alerta2.svg" library="ozelo" rendered="#{lembrete.nivel.toString() eq '2'}" style="float:left; width:15%" />
+                <h:graphicImage name="/img/alerta3.svg" library="ozelo" rendered="#{lembrete.nivel.toString() eq '3'}" style="float:left; width:15%" class="animated tada infinite"/>
+                <a style="float:right;"><i class="fa fa-thumb-tack Fs21" ></i><h:outputLabel value="#{lembrete.dataEventoPTBRSmall()}" style="padding-left:35px; text-align:right; font-size:smaller"/></a>
+                     </h:panelGroup>
+                    <br/>
+                    <a style="">
+                     <p style="font-size:large; height:70%; display:block; overflow:hidden; text-overflow:ellipsis;">#{lembrete.descricao}</p>
+                    </a>
+                </p:panel>
+                </p:commandLink>
+    </div>
+    </p:dataGrid>
+        
+        
+        
+        
+    </h:body>
+</html>
+

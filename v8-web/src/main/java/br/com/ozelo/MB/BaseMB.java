@@ -4,8 +4,9 @@ import br.com.ozelo.entidades.Log4Ozelo;
 import br.com.ozelo.entidades.Operador;
 import br.com.ozelo.servico.Log4OzeloService;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Set;
 import java.util.Date;
@@ -48,6 +49,11 @@ public abstract class BaseMB implements java.io.Serializable {
         return true;
     }
 
+     private static Date soData(Date data) throws ParseException{
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        return format.parse(format.format(data));
+    }
+    
     public SimpleDateFormat getSdf() {
         return sdf;
     }
