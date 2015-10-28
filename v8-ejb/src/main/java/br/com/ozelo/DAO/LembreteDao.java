@@ -1,6 +1,7 @@
 package br.com.ozelo.DAO;
 
 import br.com.ozelo.entidades.Lembrete;
+import br.com.ozelo.entidades.Operador;
 import java.util.List;
 import javax.persistence.EntityManager;
 
@@ -32,8 +33,8 @@ public class LembreteDao extends BasicDao {
         return getPureList(Lembrete.class, "select l from Lembrete l order by l.nivel,l.dataEvento");
     }
     
-    public List<Lembrete> getListLembreteByOperador(Integer operador_id) {
-        return getPureList(Lembrete.class, "select l from Lembrete l where l.operador_id = ?1 order by l.nivel,l.dataEvento", operador_id);
+    public List<Lembrete> getListLembreteByOperador(Operador operador) {
+        return getPureList(Lembrete.class, "select l from Lembrete l where l.operador = ?1 order by l.nivel,l.dataEvento", operador);
     }
     
     

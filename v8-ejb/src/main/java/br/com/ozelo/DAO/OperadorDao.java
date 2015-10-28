@@ -95,12 +95,18 @@ public class OperadorDao extends BasicDao {
             hoje.getDayOfMonth(),hoje.getMonthValue());
     }
     
+    public List getEventosOperadorHoje(Operador operador){
+        LocalDate hoje = LocalDate.now();
+        return getPureList(Operador.class, "select e from Evento e where Extract('Day' From e.dtInicio)=?1 and Extract('Month' From e.dtInicio)=?2 and Extract('Year' Fron e.dtInicio)=?3 and e.operador= ?4",
+            hoje.getDayOfMonth(),hoje.getMonthValue(),hoje.getYear(), operador);        
+    }
+    
 // [0] Lembretes, [1] Agenda,[2]Pendecias Veículos
     // [3] Pendencias Site, [4] Contas À Pagar, [5] À Receber
     public List<Integer> getAlertas (Operador operador){
         List <Integer> listaAlertas = new ArrayList<>();
         listaAlertas.add((Integer) getPureList(Lembrete.class, "select l from Lembrete l where l.operador = ?1", operador).size());
-        listaAlertas.add(0);
+        listaAlertas.add((Integer) getEventosOperadorHoje(operador).size());
         listaAlertas.add(0);
         listaAlertas.add(0);
         listaAlertas.add(0);

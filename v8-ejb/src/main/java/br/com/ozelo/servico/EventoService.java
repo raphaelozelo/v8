@@ -1,7 +1,8 @@
 package br.com.ozelo.servico;
 
-import br.com.ozelo.DAO.LembreteDao;
-import br.com.ozelo.entidades.Lembrete;
+
+import br.com.ozelo.DAO.EventoDao;
+import br.com.ozelo.entidades.Evento;
 import br.com.ozelo.entidades.Operador;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -19,44 +20,41 @@ import javax.persistence.PersistenceContext;
 @LocalBean
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class LembreteService extends BasicService{
+public class EventoService extends BasicService{
     
     private static final long serialVersionUID = 2L;
 
     @PersistenceContext (unitName = "AdmCarPU")
     private EntityManager em;
-    private LembreteDao lembreteDao;
+    private EventoDao eventoDao;
     
     @PostConstruct
     @PostActivate
     private void postConstruct() {
-        lembreteDao = new LembreteDao(em);
+        eventoDao = new EventoDao(em);
     }
 
-    public LembreteService() {
+    public EventoService() {
       }
     
-    public Lembrete getLembreteById(Integer id) {
-        return lembreteDao.getLembreteById(id);
-    }   
-    public Lembrete atualizaLembrete(Lembrete lembrete) {
-        return lembreteDao.atualizaLembrete(lembrete);
+   public Evento getEventoById(Long id) {
+        return eventoDao.getEventoById(id);
+    } 
+   
+    public Evento atualizaEvento(Evento evento) {
+        return eventoDao.atualizaEvento(evento);
     }
     
-    public void removeLembrete(Lembrete lembrete) {
-        lembreteDao.removeLembrete(lembrete);
+    public void removeEvento(Evento evento) {
+        eventoDao.removeEvento(evento);
     }
     
-    public Lembrete novoLembrete(Lembrete lembrete) {
-        return lembreteDao.novoLembrete(lembrete);
+    public Evento novoEvento(Evento evento) {
+        return eventoDao.novoEvento(evento);
     }
    
-    public List<Lembrete> getListLembrete() {
-        return lembreteDao.getListLembrete();
-    }
-    
-    public List<Lembrete> getListLembreteByOperador(Operador operador) {
-        return lembreteDao.getListLembreteByOperador(operador);
+    public List<Evento> getListEventoByOperador(Operador operador) {
+        return eventoDao.getListEventoByOperador(operador);
     }
     
 }
