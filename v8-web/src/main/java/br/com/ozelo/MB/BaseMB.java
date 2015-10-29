@@ -10,6 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Set;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -49,9 +51,14 @@ public abstract class BaseMB implements java.io.Serializable {
         return true;
     }
 
-     private static Date soData(Date data) throws ParseException{
+     public Date soData(Date data) {
         DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        return format.parse(format.format(data));
+        try {
+            return format.parse(format.format(data));
+        } catch (ParseException ex) {
+            Logger.getLogger(BaseMB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
     
     public SimpleDateFormat getSdf() {

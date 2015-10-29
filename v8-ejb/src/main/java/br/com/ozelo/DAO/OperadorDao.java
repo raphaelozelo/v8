@@ -105,12 +105,18 @@ public class OperadorDao extends BasicDao {
     // [3] Pendencias Site, [4] Contas À Pagar, [5] À Receber
     public List<Integer> getAlertas (Operador operador){
         List <Integer> listaAlertas = new ArrayList<>();
-        listaAlertas.add((Integer) getPureList(Lembrete.class, "select l from Lembrete l where l.operador = ?1", operador).size());
-        listaAlertas.add((Integer) getEventosOperadorHoje(operador).size());
+      //  listaAlertas.add(retornaSize(getPureList(Lembrete.class, "select l from Lembrete l where l.operador = ?1", operador)));
+      listaAlertas.add(0);
+        listaAlertas.add(retornaSize(getEventosOperadorHoje(operador)));
         listaAlertas.add(0);
         listaAlertas.add(0);
         listaAlertas.add(0);
         listaAlertas.add(0);
        return listaAlertas;
+    }
+    
+    private Integer retornaSize(List lista){
+        Integer size = (lista == null) ? 0 : lista.size();
+        return size;
     }
 }

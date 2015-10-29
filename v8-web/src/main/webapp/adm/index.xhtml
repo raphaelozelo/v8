@@ -9,7 +9,7 @@
 
     <ui:define name="content">
 <div class="Container100">                    
- <!--   AniversÃ¡rios -->
+ <!--   Aniversarios -->
  <c:if test="#{operadorMB.aniversariantes.size()> 0}" >       
  <div class="Container80 Responsive100">
             <div class="ContainerIndent">
@@ -32,7 +32,22 @@
         </div>
   </c:if>
 
-  <!-- Lembretes  -->
+   <!-- Agenda Hoje  -->
+<c:if test="#{operadorMB.getnAlertas().get(1) > 0}" >       
+  <div style="float: right" class="Container20 Responsive100">
+    <div class="Container100 Responsive50">
+     <div class="ContainerIndent">
+      <div class="Card ShadowEffect HeiAutoOnMobile OvHidden">
+       <div class="Container100" style="margin:0px 10px 10px -10px; padding:0px 10px;">
+ 
+
+       </div>
+      </div>
+     </div>
+     </div>
+    </div>
+</c:if>
+    <!-- Lembretes  -->
   <div style="float: right" class="Container20 Responsive100">
     <div class="Container100 Responsive50">
      <div class="ContainerIndent">
@@ -55,10 +70,7 @@
                     </a>
                 </p:panel>
              </div>
-    </p:dataGrid>
-           
-                    
-                    
+    </p:dataGrid>             
        </div>
       </div>
      </div>

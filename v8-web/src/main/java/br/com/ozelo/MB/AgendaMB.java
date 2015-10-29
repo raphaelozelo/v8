@@ -2,6 +2,7 @@ package br.com.ozelo.MB;
 
 import br.com.ozelo.entidades.Evento;
 import br.com.ozelo.servico.EventoService;
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -35,7 +36,6 @@ public class AgendaMB extends BaseMB {
     @PostConstruct
     public void carregaListaEventos(){
         listaEventos = new DefaultScheduleModel();
-        Date hoje = soData(new Date());
         List<Evento> evOper = eventoService.getListEventoByOperador(operadorMB.getOperadorLogado());
         if (evOper != null){
             for (Evento ev : evOper) {
@@ -49,12 +49,9 @@ public class AgendaMB extends BaseMB {
               evt.setStyleClass(ev.getCssEvento());
               evt.setEditable(true);
             listaEventos.addEvent(evt);
-            if (hoje.after(ev.getDtInicio())||(hoje.before(ev.getDtFim()))){
-                
-            }
          }
         }
-    }
+ }
 
     public ScheduleEvent retornaScheduleEvent(Evento ev){
               DefaultScheduleEvent evt = new DefaultScheduleEvent();
@@ -106,6 +103,7 @@ public void doSalvar(){
       } else {
         eventoService.atualizaEvento(novoEvento);
     }
+    carregaListaEventos();
 }
 
 public void doDeletar (){
