@@ -2,8 +2,6 @@ package br.com.ozelo.MB;
 
 import br.com.ozelo.entidades.Evento;
 import br.com.ozelo.servico.EventoService;
-import java.text.ParseException;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -78,14 +76,23 @@ public class AgendaMB extends BaseMB {
               ev.setOperador(operadorMB.getOperadorLogado());
             return ev;
     }
-    
+ 
 public void eventoClicado(SelectEvent selectEvent){ 
     ScheduleEvent eventoClicado = (ScheduleEvent) selectEvent.getObject();
+        System.err.println("2222dateselect1");
+System.err.println(selectEvent.getObject().toString());
+    
    eventoSelecionado = retornaScheduleEvent(eventoService.getEventoById((Long) eventoClicado.getData()));
+    System.err.println("clicadoselect1");
+System.err.println(eventoSelecionado.getEndDate().toString());
+    
 }
 
 public void onDateSelect(SelectEvent selectEvent) {
-        eventoSelecionado = new DefaultScheduleEvent("", (Date) selectEvent.getObject(), (Date) selectEvent.getObject());
+    System.err.println("dateselect1");
+System.err.println(eventoSelecionado.getEndDate().toString());
+    eventoSelecionado = new DefaultScheduleEvent("", (Date) selectEvent.getObject(), (Date) selectEvent.getObject());
+System.err.println(eventoSelecionado.getEndDate().toString());
 }
 
 public boolean isDatasCertas(){
