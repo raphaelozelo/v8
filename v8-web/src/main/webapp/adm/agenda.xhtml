@@ -8,19 +8,18 @@
                 xmlns:p="http://primefaces.org/ui">
     
     <ui:define name="content">
-        <h:form>
+
             
     <div class="Container80">
       <div class="ContainerIndent">
        <div class="Card ShadowEffect  ">
        <div class="Container100">
         <div class="ContainerIndent">
-         <p:schedule id="agenda" value="#{agendaMB.listaEventos}" widgetVar="myschedule" locale="pt" timeZone="America/Sao_Paulo" tooltip="true">
+         <p:schedule id="agenda" value="#{agendaMB.listaEventos}" widgetVar="myschedule" locale="pt" timeZone="America/Sao_Paulo" tooltip="true"
+                     draggable="false" resizable="false" >
                 <p:ajax event="dateSelect" listener="#{agendaMB.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
                 <p:ajax event="eventSelect" listener="#{agendaMB.eventoClicado}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
-                <p:ajax event="eventMove" listener="#{agendaMB.doMover}" />
-                <p:ajax event="eventResize" listener="#{agendaMB.doRedimencionar}"  />
-         </p:schedule>
+          </p:schedule>
             <p:dialog widgetVar="eventDialog" header="Compromisso" showEffect="clip" hideEffect="clip" showHeader="true" resizable="false">
                 <p:messages autoUpdate="true" />    
         <h:panelGrid id="eventDetails" columns="1">
@@ -48,7 +47,7 @@
        </div>
       </div>
     </div>
-        </h:form>
+
     </ui:define>
 
 </ui:composition>

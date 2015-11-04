@@ -8,3 +8,9 @@
 
 .lembreteGrid2 {border: none !important;
 }
+
+.strongLabel{
+          background-color: beige;
+          box-shadow: 0 1px 0 #000;
+          font-size: x-large;
+}

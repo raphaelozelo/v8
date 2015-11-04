@@ -1,13 +1,14 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="./../baseFace.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:p="http://primefaces.org/ui">
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
     
-    <ui:define name="conteudo">
-        <h:form>
+    <ui:define name="content">
+
             <div class="Container70">
             <div class="ContainerIndent">
                 <div class="Card ShadowEffect  ">
@@ -16,28 +17,28 @@
                             <h2 class="BigTopic">Cadastro Próprio</h2>
                             <p:messages/>
                                 <h:panelGrid columns="1" cellpadding="5">
-                                    <p:outputLabel for="codigo:" value="Id.:" />
-                                    <p:outputLabel value="#{operadorMB.operadorLogado.id}" id="codigo:" class="strongLabel"/>
+                                    <p:outputLabel for="codigo" value="Id.:" />
+                                    <p:outputLabel value="#{operadorMB.operadorLogado.id}" id="codigo" class="strongLabel"/>
 
-                                    <p:outputLabel for="apelido:" value="Apelido:" />
-                                    <p:outputLabel value="#{operadorMB.operadorLogado.apelido}" id="apelido:" class="strongLabel"/>
+                                    <p:outputLabel for="apelido" value="Apelido:" />
+                                    <p:outputLabel value="#{operadorMB.operadorLogado.apelido}" id="apelido" class="strongLabel"/>
 
-                                    <p:outputLabel for="nome:" value="Nome:" />
-                                    <p:outputLabel value="#{operadorMB.operadorLogado.nome}" id="nome:" class="strongLabel"/>
+                                    <p:outputLabel for="nome" value="Nome:" />
+                                    <p:outputLabel value="#{operadorMB.operadorLogado.nome}" id="nome" class="strongLabel"/>
 
                                     
-                                    <p:outputLabel for="funcao:" value="Função:" />
-                                    <p:outputLabel value="#{operadorMB.operadorLogado.funcao}" id="funcao:" class="strongLabel"/>
+                                    <p:outputLabel for="funcao" value="Função:" />
+                                    <p:outputLabel value="#{operadorMB.operadorLogado.funcao}" id="funcao" class="strongLabel"/>
 
-                                    <p:outputLabel for="nacesso:" value="Nr. Acessos:" />
-                                    <p:outputLabel value="#{operadorMB.operadorLogado.nrAcessos}" id="nacesso:" class="strongLabel"/>
+                                    <p:outputLabel for="nacesso" value="Nr. Acessos:" />
+                                    <p:outputLabel value="#{operadorMB.operadorLogado.nrAcessos}" id="nacesso" class="strongLabel"/>
 
                                     <p:outputLabel for="ulAcesso" value="Último Acesso:"/>
                                     <p:outputLabel id="ulAcesso" value="#{operadorMB.operadorLogado.dtUltAcesso}" class="strongLabel">
                                     <f:convertDateTime locale="pt" dateStyle="long" pattern="dd/MM/yyyy  HH:mm" /></p:outputLabel>
                                     
                                     <p:outputLabel for="dtNasc" value="Data Nascimento:" />
-                                    <p:calendar id="dtNasc" locale="pt_BR" navigator="true" pattern="dd/MM/YYYY" value="#{operadorMB.operadorLogado.dtNasc}"/>
+                                    <p:calendar id="dtNasc" locale="pt" navigator="true" pattern="dd/MM/YYYY" value="#{operadorMB.operadorLogado.dtNasc}"/>
             
                                     <p:outputLabel for="sexo" value="Sexo:"/>
                                     <p:selectOneRadio id="sexo" value="#{operadorMB.operadorLogado.sexo}" >
@@ -49,13 +50,13 @@
                                     <p:inputText id="email" value="#{operadorMB.operadorLogado.email}" validatorMessage="e-Mail Inválido!" >
                                     <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
                                     </p:inputText>
-            
-                                    <p:commandButton value="Trocar a Senha" action="/adm/config/trocaSenha.faces?faces-redirect=true"/>
-                                     <f:facet name="footer" >
-                                     <p:commandButton value="Confirma Edição" action="#{operadorMB.editaProprio}"/>
-                                     <p:spacer width="10"/>
-                                    <p:commandButton value="Cancela Edição" action="/adm/index.faces?faces-redirect=true" immediate="true"/>
-                                    </f:facet> 
+                                    <p:commandButton value="Trocar a Senha" icon="fa fa-unlock-alt Fs16 White" action="/adm/config/trocaSenha.faces?faces-redirect=true" immediate="true" />
+                                    <p:separator/>
+                                    <h:panelGroup>
+                                    <p:commandButton value="Confirma Edição" icon="fa fa-check-circle Fs16 White" action="#{operadorMB.editaProprio}" />
+                                    &nbsp;
+                                    <p:commandButton value="Cancela Edição" icon="fa fa-ban Fs16 White" action="/adm/index.faces?faces-redirect=true" immediate="true" styleClass="RedButton"/>
+                                    </h:panelGroup>
                                 </h:panelGrid>
                          
                         </div>
@@ -63,8 +64,7 @@
                 </div>
             </div>
         </div>
-                    
-        </h:form>
+
     </ui:define>
 
 </ui:composition>

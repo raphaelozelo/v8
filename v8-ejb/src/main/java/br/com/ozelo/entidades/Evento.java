@@ -19,15 +19,15 @@ public class Evento implements java.io.Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column (length = 50)
-    @NotNull (message="Informe o Título do Evento!")
+    @NotNull (message="Informe o Título do Compromisso!")
     private String titulo;
     @Column
     @NotNull
-     @Temporal(javax.persistence.TemporalType.DATE)
+     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dtInicio;
     @Column
     @NotNull
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dtFim;
     @Column
     private String descricao;

@@ -76,23 +76,14 @@ public class AgendaMB extends BaseMB {
               ev.setOperador(operadorMB.getOperadorLogado());
             return ev;
     }
- 
+            
 public void eventoClicado(SelectEvent selectEvent){ 
     ScheduleEvent eventoClicado = (ScheduleEvent) selectEvent.getObject();
-        System.err.println("2222dateselect1");
-System.err.println(selectEvent.getObject().toString());
-    
    eventoSelecionado = retornaScheduleEvent(eventoService.getEventoById((Long) eventoClicado.getData()));
-    System.err.println("clicadoselect1");
-System.err.println(eventoSelecionado.getEndDate().toString());
-    
 }
 
 public void onDateSelect(SelectEvent selectEvent) {
-    System.err.println("dateselect1");
-System.err.println(eventoSelecionado.getEndDate().toString());
     eventoSelecionado = new DefaultScheduleEvent("", (Date) selectEvent.getObject(), (Date) selectEvent.getObject());
-System.err.println(eventoSelecionado.getEndDate().toString());
 }
 
 public boolean isDatasCertas(){
@@ -119,16 +110,6 @@ public void doDeletar (){
      eventoService.removeEvento(novoEvento);
      carregaListaEventos();
    }    
-}
-
-public void doMover (ScheduleEntryMoveEvent event){
-    ScheduleEvent evt = (ScheduleEvent) event;
-    eventoService.atualizaEvento(retornaEvento(evt));
-}
-
-public void doRedimencionar (ScheduleEntryResizeEvent event){
-    ScheduleEvent evt = (ScheduleEvent) event;
-    eventoService.atualizaEvento(retornaEvento(evt));
 }
 
     public ScheduleModel getListaEventos() {

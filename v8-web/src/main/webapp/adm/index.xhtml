@@ -2,6 +2,7 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="/WEB-INF/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
@@ -34,17 +35,16 @@
 
    <!-- Agenda Hoje  -->
 <c:if test="#{operadorMB.getnAlertas().get(1) > 0}" >       
-  <div style="float: right" class="Container20 Responsive100">
+  <div class="Container20 Responsive100">
     <div class="Container100 Responsive50">
      <div class="ContainerIndent">
       <div class="Card ShadowEffect HeiAutoOnMobile OvHidden">
-       <div class="Container100" style="margin:0px 10px 10px -10px; padding:0px 10px;">
- <p:schedule id="agenda" value="#{agendaMB.listaEventos}" widgetVar="myschedule" locale="pt" timeZone="America/Sao_Paulo" tooltip="true">
-                <p:ajax event="dateSelect" listener="#{agendaMB.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+       <div class="Container100" style="margin:0px 10px 10px -10px; padding:0px 10px;" >
+           <p:schedule id="agenda" value="#{agendaMB.listaEventos}" widgetVar="myschedule" locale="pt" view="agendaDay" showHeader="false"  timeZone="America/Sao_Paulo" tooltip="true"
+                       draggable="false" resizable="false" >
+               <p:ajax event="dateSelect" listener="#{agendaMB.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
                 <p:ajax event="eventSelect" listener="#{agendaMB.eventoClicado}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
-                <p:ajax event="eventMove" listener="#{agendaMB.doMover}" />
-                <p:ajax event="eventResize" listener="#{agendaMB.doRedimencionar}"  />
-         </p:schedule>
+          </p:schedule>
             <p:dialog widgetVar="eventDialog" header="Compromisso" showEffect="clip" hideEffect="clip" showHeader="true" resizable="false">
                 <p:messages autoUpdate="true" />    
         <h:panelGrid id="eventDetails" columns="1">
@@ -104,10 +104,7 @@
 
  </div>
     
-        
-      
-        <p:commandButton value="Gerar Lembretes" action="../adm/agenda.faces"/>
-        
+    
         
             </ui:define>
 
