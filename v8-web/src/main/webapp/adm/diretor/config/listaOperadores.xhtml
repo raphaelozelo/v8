@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+    
+    <ui:define name="content">
+
+            <div class="Container100">
+            <div class="ContainerIndent">
+                <div class="Card ShadowEffect  ">
+                    <div class="Container96">
+                        <div class="ContainerIndent">
+                            <h2 class="BigTopic">Operadores Cadastrados</h2>
+                          <p:growl id="growl" showDetail="true" sticky="true" /> 
+            <p:tabView >
+        <p:tab title="Ativos">
+            <p:dataTable id="operadorDT" var="operador" value="#{operadorMB.operadoresAtivos}" 
+                         selectionMode="single" resizableColumns="true" selection="#{operadorMB.operadorSelecionado}" rowKey="#{operador.id}" >
+                <p:ajax event="rowSelect" oncomplete="PF('dlgCadastro').show();"/>
+        <p:column headerText="Id" width="3%">
+            <h:outputText value="#{operador.id}"/></p:column>
+                 <p:column headerText="Apelido" width="18%">
+            <h:outputText value="#{operador.apelido}" /></p:column>
+                 <p:column headerText="Nome" width="45%">
+            <h:outputText value="#{operador.nome}" /></p:column>
+                 <p:column headerText="Função" width="10%">
+            <h:outputText value="#{operador.funcao}" /></p:column>
+                 <p:column headerText="N." width="2%">
+            <h:outputText value="#{operador.nivel}" /></p:column>
+                 <p:column headerText="Aces." width="4%" >
+            <h:outputText value="#{operador.nrAcessos}" /></p:column>
+                 <p:column headerText="Último Acesso" width="10%">
+                  <h:outputText value="#{operador.dtUltAcesso}" >
+                     <f:convertDateTime pattern="dd/MM/yyyy HH:mm" /></h:outputText></p:column>
+    </p:dataTable>  
+            <p:commandButton id="newBT" value="Novo Operador" icon="ui-icon-circle-plus" action="#{operadorMB.doNovoOperador()}" />
+        </p:tab>
+            </p:tabView>                
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p:dialog widgetVar="dlgCadastro" modal="true" resizable="false">
+            <h:panelGrid columns="2" cellpadding="5">
+                <h:panelGroup>
+              <p:outputLabel value="Id.:" class="formLabel" />
+              <p:outputLabel value="#{operadorMB.operadorView.id}" class="strongLabel"/>
+                </h:panelGroup>
+                <h:panelGroup>
+              <p:outputLabel value="Apelido:" class="formLabel" />
+              <p:outputLabel value="#{operadorMB.operadorView.apelido}" class="strongLabel"/>
+                </h:panelGroup>
+            </h:panelGrid>   
+         <h:panelGrid columns="1" cellpadding="5">
+         <p:outputLabel value="Nome:" class="formLabel" />
+         <p:outputLabel value="#{operadorMB.operadorView.nome}" class="strongLabel"/>
+         <p:outputLabel value="Função:" class="formLabel" />
+         <p:outputLabel value="#{operadorMB.operadorView.funcao}" class="strongLabel"/>
+         <p:outputLabel value="Nível Acesso:" class="formLabel"/>
+         <p:outputLabel value="#{operadorMB.operadorView.nivel}" class="strongLabel"/>
+         <p:outputLabel value="Nr. Acessos:" class="formLabel" />
+         <p:outputLabel value="#{operadorMB.operadorView.nrAcessos}" class="strongLabel"/>
+         <p:outputLabel value="Último Acesso:" class="formLabel" />
+         <p:outputLabel value="#{operadorMB.operadorView.dtUltAcesso}" class="strongLabel">
+         <f:convertDateTime pattern="dd/MM/yyyy  HH:mm" /></p:outputLabel>
+         <p:outputLabel value="Data Nascimento:" class="formLabel" />
+         <p:outputLabel value="#{operadorMB.operadorView.dtNasc}">
+         <f:convertDateTime pattern="dd/MM/yyyy  HH:mm" /></p:outputLabel>
+         <p:outputLabel value="Sexo:" class="formLabel" />
+         <p:outputLabel value="#{operadorMB.operadorView.sexo}" class="strongLabel"/>        
+         <p:outputLabel value="e-Mail:" class="formLabel" />
+         <p:outputLabel value="#{operadorMB.operadorView.email}" class="strongLabel"/>
+         <p:fieldset legend=" Quadros de Avisos " >
+         <h:panelGrid columns="2" >
+         <p:selectBooleanCheckbox  itemLabel="Pendências Documentos Veículos  " value="#{operadorMB.operadorView.viewPendenciaVeic}"/>
+         <p:selectBooleanCheckbox itemLabel="Atualização do Site Loja" value="#{operadorMB.operadorView.viewAdmSite}"/>
+         <p:selectBooleanCheckbox itemLabel="Contas à Pagar" value="#{operadorMB.operadorView.viewContasPagar}"/>
+         <p:selectBooleanCheckbox itemLabel="Contas à Receber" value="#{operadorMB.operadorView.viewContasReceber}"/>
+         </h:panelGrid>
+         </p:fieldset>
+         </h:panelGrid>
+        </p:dialog>
+    </ui:define>
+
+</ui:composition>
