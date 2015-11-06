@@ -17,36 +17,36 @@
                             <h2 class="BigTopic">Cadastro Próprio</h2>
                             <p:messages/>
                                 <h:panelGrid columns="1" cellpadding="5">
-                                    <p:outputLabel for="codigo" value="Id.:" />
+                                    <p:outputLabel for="codigo" value="Id.:" class="formLabel" />
                                     <p:outputLabel value="#{operadorMB.operadorLogado.id}" id="codigo" class="strongLabel"/>
 
-                                    <p:outputLabel for="apelido" value="Apelido:" />
+                                    <p:outputLabel for="apelido" value="Apelido:" class="formLabel" />
                                     <p:outputLabel value="#{operadorMB.operadorLogado.apelido}" id="apelido" class="strongLabel"/>
 
-                                    <p:outputLabel for="nome" value="Nome:" />
+                                    <p:outputLabel for="nome" value="Nome:" class="formLabel" />
                                     <p:outputLabel value="#{operadorMB.operadorLogado.nome}" id="nome" class="strongLabel"/>
 
                                     
-                                    <p:outputLabel for="funcao" value="Função:" />
+                                    <p:outputLabel for="funcao" value="Função:" class="formLabel" />
                                     <p:outputLabel value="#{operadorMB.operadorLogado.funcao}" id="funcao" class="strongLabel"/>
 
-                                    <p:outputLabel for="nacesso" value="Nr. Acessos:" />
+                                    <p:outputLabel for="nacesso" value="Nr. Acessos:" class="formLabel" />
                                     <p:outputLabel value="#{operadorMB.operadorLogado.nrAcessos}" id="nacesso" class="strongLabel"/>
 
-                                    <p:outputLabel for="ulAcesso" value="Último Acesso:"/>
+                                    <p:outputLabel for="ulAcesso" value="Último Acesso:" class="formLabel" />
                                     <p:outputLabel id="ulAcesso" value="#{operadorMB.operadorLogado.dtUltAcesso}" class="strongLabel">
                                     <f:convertDateTime locale="pt" dateStyle="long" pattern="dd/MM/yyyy  HH:mm" /></p:outputLabel>
                                     
-                                    <p:outputLabel for="dtNasc" value="Data Nascimento:" />
+                                    <p:outputLabel for="dtNasc" value="Data Nascimento:" class="formLabel" />
                                     <p:calendar id="dtNasc" locale="pt" navigator="true" pattern="dd/MM/YYYY" value="#{operadorMB.operadorLogado.dtNasc}"/>
             
-                                    <p:outputLabel for="sexo" value="Sexo:"/>
+                                    <p:outputLabel for="sexo" value="Sexo:" class="formLabel" />
                                     <p:selectOneRadio id="sexo" value="#{operadorMB.operadorLogado.sexo}" >
                                     <f:selectItem itemLabel="Fem." itemValue="F" />
                                     <f:selectItem itemLabel="Masc." itemValue="M" />
                                     </p:selectOneRadio>         
                                     
-                                    <p:outputLabel for="email" value="e-Mail:"/>
+                                    <p:outputLabel for="email" value="e-Mail:" class="formLabel" />
                                     <p:inputText id="email" value="#{operadorMB.operadorLogado.email}" validatorMessage="e-Mail Inválido!" >
                                     <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
                                     </p:inputText>

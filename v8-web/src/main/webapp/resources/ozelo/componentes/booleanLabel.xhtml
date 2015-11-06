@@ -6,13 +6,12 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
        xmlns:p="http://primefaces.org/ui">
 
-    <!-- INTERFACE -->
+        <!-- INTERFACE -->
     <cc:interface>
         <cc:attribute name="valueBoolean" type="java.lang.Boolean" shortDescription="Valor Boolean" required="true" />
         <cc:attribute name="label" type="java.lang.String" shortDescription="Label do componente" />
         <cc:attribute name="style" type="java.lang.String" shortDescription="Style Css do Label do componente" />
-    
-     </cc:interface>
+    </cc:interface>
 
     <!-- IMPLEMENTATION -->
     <cc:implementation>
@@ -23,7 +22,7 @@
             <c:if test="#{cc.attrs.valueBoolean ne true}">
                 <i class="icon-blank32"></i>
             </c:if>
-            <p:outputLabel value="#{cc.attrs.label}" class="#{cc.attrs.style}"/>
+            <p:outputLabel value="  #{cc.attrs.label}" style="#{cc.attrs.style}"/>
         </h:form>
     </cc:implementation>
 </html>

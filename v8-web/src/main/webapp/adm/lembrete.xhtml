@@ -42,8 +42,7 @@
          <p:messages  />
          <h:graphicImage value="/resources/img/lembrete/pin.png" style="position:fixed; margin:0 auto;"/>
          <h:panelGrid columns="1" >
-                      <ozeloComp:alertaLembrete valueAlert="#{lembreteMB.lembreteSelecionado.nivel}" id="nivelImg" onClick="#{lembreteMB.changeNivel()}"
-                                    style="float: left;"/>
+              
  
           <h:panelGroup>
            <h:graphicImage value="/resources/img/lembrete/alertaImg3.gif" rendered="#{lembrete.nivel.toString() eq '1'}" style="float: left;"/>
@@ -74,8 +73,7 @@
          <p:messages id="lembretePanel" />
                 <h:panelGrid columns="1" >
           <h:panelGroup>
-          <ozeloComp:alertaLembrete valueAlert="#{lembreteMB.lembreteSelecionado.nivel}" id="nivelImg" onClick="#{lembreteMB.changeNivel()}"
-                 style="float: left;"/>
+        
         <h:panelGroup style="float: right">
             <h:outputLabel for ="inputCor" value="Cor: "/>
         <h:selectOneMenu id="inputCor" value="#{lembreteMB.lembreteSelecionado.corCss}"  > 

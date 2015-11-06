@@ -27,8 +27,9 @@
                                     <p:inputText id="funcao" value="#{operadorMB.operadorView.funcao}" size="30" required="true"/>
 
                                     <p:outputLabel for="nivel" value="Nível Acesso:" class="formLabel"/>
-            <p:spinner id="nivel" value="#{operadorMB.operadorView.nivel}" min="1" max="5" size="1" />
-                                    
+                                    <p:spinner id="nivel" value="#{operadorMB.operadorView.nivel}" min="1" max="5" size="1" />
+                                    <p:outputLabel value="Data Admissão:" class="formLabel" />
+                                    <p:calendar value="#{operadorMB.operadorView.dtAdmissao}" locale="pt" navigator="true" pattern="dd/MM/YYYY" />
                                     <p:outputLabel for="dtNasc" value="Data Nascimento:" class="formLabel" />
                                     <p:calendar id="dtNasc" locale="pt" navigator="true" pattern="dd/MM/YYYY" value="#{operadorMB.operadorView.dtNasc}"/>
             

@@ -5,7 +5,9 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
-                template="/WEB-INF/template.xhtml">
+                template="/WEB-INF/template.xhtml"
+                xmlns:oz="http://xmlns.jcp.org/jsf/composite/ozelo/componentes"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     
     <ui:define name="content">
 
@@ -19,17 +21,17 @@
             <p:tabView >
         <p:tab title="Ativos">
             <p:dataTable id="operadorDT" var="operador" value="#{operadorMB.operadoresAtivos}" 
-                         selectionMode="single" resizableColumns="true" selection="#{operadorMB.operadorSelecionado}" rowKey="#{operador.id}" >
-                <p:ajax event="rowSelect" oncomplete="PF('dlgCadastro').show();"/>
+                         selectionMode="single" resizableColumns="true" selection="#{operadorMB.operadorView}" rowKey="#{operador.id}" >
+                <p:ajax event="rowSelect" process="operadorDT" update=":form:cadastroDetalhes" oncomplete="PF('dlgCadastro').show();"/>
         <p:column headerText="Id" width="3%">
-            <h:outputText value="#{operador.id}"/></p:column>
+            <h:outputText value="#{operador.id}" /></p:column>
                  <p:column headerText="Apelido" width="18%">
             <h:outputText value="#{operador.apelido}" /></p:column>
                  <p:column headerText="Nome" width="45%">
             <h:outputText value="#{operador.nome}" /></p:column>
                  <p:column headerText="Função" width="10%">
             <h:outputText value="#{operador.funcao}" /></p:column>
-                 <p:column headerText="N." width="2%">
+                 <p:column headerText="Nv." width="2%">
             <h:outputText value="#{operador.nivel}" /></p:column>
                  <p:column headerText="Aces." width="4%" >
             <h:outputText value="#{operador.nrAcessos}" /></p:column>
@@ -46,44 +48,68 @@
             </div>
         </div>
         <p:dialog widgetVar="dlgCadastro" modal="true" resizable="false">
-            <h:panelGrid columns="2" cellpadding="5">
-                <h:panelGroup>
-              <p:outputLabel value="Id.:" class="formLabel" />
-              <p:outputLabel value="#{operadorMB.operadorView.id}" class="strongLabel"/>
-                </h:panelGroup>
-                <h:panelGroup>
-              <p:outputLabel value="Apelido:" class="formLabel" />
-              <p:outputLabel value="#{operadorMB.operadorView.apelido}" class="strongLabel"/>
-                </h:panelGroup>
-            </h:panelGrid>   
+            <p:panel id="cadastroDetalhes" class="semBorda">
+            <p:panelGrid columns="3" layout="grid" class="semBorda">
+            <p:outputLabel value="Id.:" class="formLabel" />
+            <p:outputLabel value="Apelido:" class="formLabel" />
+            &nbsp;
+            <p:outputLabel value="#{operadorMB.operadorView.id}" class="strongLabel"/>
+            <p:outputLabel value="#{operadorMB.operadorView.apelido}" class="strongLabel"/>
+             <p:outputLabel value="ATIVO" rendered="#{operadorMB.operadorView.ativo}" style="font-size: xx-large; color: blue" />
+             <p:outputLabel value="DESATIVADO" rendered="#{not operadorMB.operadorView.ativo}" style="font-size: xx-large; color: yellow" />
+             <p:outputLabel value="DEMITIDO" rendered="#{operadorMB.operadorView.demitido}" style="font-size: xx-large; color: red" />
+            </p:panelGrid> 
          <h:panelGrid columns="1" cellpadding="5">
          <p:outputLabel value="Nome:" class="formLabel" />
          <p:outputLabel value="#{operadorMB.operadorView.nome}" class="strongLabel"/>
-         <p:outputLabel value="Função:" class="formLabel" />
-         <p:outputLabel value="#{operadorMB.operadorView.funcao}" class="strongLabel"/>
-         <p:outputLabel value="Nível Acesso:" class="formLabel"/>
-         <p:outputLabel value="#{operadorMB.operadorView.nivel}" class="strongLabel"/>
-         <p:outputLabel value="Nr. Acessos:" class="formLabel" />
-         <p:outputLabel value="#{operadorMB.operadorView.nrAcessos}" class="strongLabel"/>
-         <p:outputLabel value="Último Acesso:" class="formLabel" />
-         <p:outputLabel value="#{operadorMB.operadorView.dtUltAcesso}" class="strongLabel">
-         <f:convertDateTime pattern="dd/MM/yyyy  HH:mm" /></p:outputLabel>
+         <p:panelGrid columns="2" layout="grid" class="semBorda">
+          <p:outputLabel value="Função:" class="formLabel" />         
+          <p:outputLabel value="Nível Acesso:" class="formLabel"/>
+          <p:outputLabel value="#{operadorMB.operadorView.funcao}" class="strongLabel"/>
+          <p:outputLabel value="#{operadorMB.operadorView.nivel}" class="strongLabel"/>
+          <p:outputLabel value="Data Admissão:" class="formLabel" />
+        <c:choose>
+            <c:when test="#{operadorMB.operadorView.ativo}" >&nbsp;</c:when>
+            <c:when test="#{operadorMB.operadorView.ativo ne true }" >
+                <p:outputLabel value="Data Desativação:" class="formLabel"/></c:when>
+        </c:choose>
+          <p:outputLabel value="#{operadorMB.operadorView.dtAdmissao}" class="strongLabel">
+            <f:convertDateTime pattern="dd/MM/yyyy" /></p:outputLabel>
+        <c:choose>
+            <c:when test="#{operadorMB.operadorView.ativo}" >&nbsp;</c:when>
+            <c:when test="#{operadorMB.operadorView.ativo ne true }" > 
+          <p:outputLabel value="#{operadorMB.operadorView.dtDesativacao}" class="strongLabel">
+              <f:convertDateTime pattern="dd/MM/yyyy" /></p:outputLabel></c:when>
+        </c:choose>
+          <p:outputLabel value="Nr. Acessos:" class="formLabel" />
+          <p:outputLabel value="Último Acesso:" class="formLabel" />
+          <p:outputLabel value="#{operadorMB.operadorView.nrAcessos}" class="strongLabel"/>
+          <p:outputLabel value="#{operadorMB.operadorView.dtUltAcesso}" class="strongLabel">
+            <f:convertDateTime pattern="dd/MM/yyyy  HH:mm" /></p:outputLabel>
          <p:outputLabel value="Data Nascimento:" class="formLabel" />
-         <p:outputLabel value="#{operadorMB.operadorView.dtNasc}">
-         <f:convertDateTime pattern="dd/MM/yyyy  HH:mm" /></p:outputLabel>
          <p:outputLabel value="Sexo:" class="formLabel" />
+         <p:outputLabel value="#{operadorMB.operadorView.dtNasc}" class="strongLabel">
+         <f:convertDateTime pattern="dd/MM/yyyy" /></p:outputLabel>
          <p:outputLabel value="#{operadorMB.operadorView.sexo}" class="strongLabel"/>        
+        </p:panelGrid>
          <p:outputLabel value="e-Mail:" class="formLabel" />
          <p:outputLabel value="#{operadorMB.operadorView.email}" class="strongLabel"/>
          <p:fieldset legend=" Quadros de Avisos " >
          <h:panelGrid columns="2" >
-         <p:selectBooleanCheckbox  itemLabel="Pendências Documentos Veículos  " value="#{operadorMB.operadorView.viewPendenciaVeic}"/>
+         <oz:booleanLabel label="Pendências Documentos Veículos" valueBoolean="#{operadorMB.operadorView.viewPendenciaVeic}"/>
          <p:selectBooleanCheckbox itemLabel="Atualização do Site Loja" value="#{operadorMB.operadorView.viewAdmSite}"/>
-         <p:selectBooleanCheckbox itemLabel="Contas à Pagar" value="#{operadorMB.operadorView.viewContasPagar}"/>
-         <p:selectBooleanCheckbox itemLabel="Contas à Receber" value="#{operadorMB.operadorView.viewContasReceber}"/>
+         <p:selectBooleanCheckbox itemLabel="Contas á  Pagar" value="#{operadorMB.operadorView.viewContasPagar}"/>
+         <p:selectBooleanCheckbox itemLabel="Contas á  Receber" value="#{operadorMB.operadorView.viewContasReceber}"/>
          </h:panelGrid>
          </p:fieldset>
          </h:panelGrid>
+                <p:commandButton icon="fa fa-pencil Fs16 White" alt="Editar" styleClass="Fright BlueButton" actionListener="#{agendaMB.doDeletar}"  />
+                <p:commandButton icon="fa fa-unlock Fs16 White" alt="Gerar Senha Provisória" styleClass="Fright YellowButton" actionListener="#{agendaMB.doSalvar}"  />
+                <p:commandButton icon="fa fa-pencil Fs16 White" alt="Desativar Operador" styleClass="Fright RedButton" actionListener="#{agendaMB.doDeletar}"  />
+                <p:commandButton icon="fa fa-lock Fs16 White" alt="Demitir Operador" styleClass="Fright RedButton" actionListener="#{agendaMB.doSalvar}"  />
+                <p:commandButton icon="fa fa-pencil Fs16 White" alt="Auditoria" styleClass="Fright YellowButton" actionListener="#{agendaMB.doDeletar}"  />
+                
+         </p:panel>
         </p:dialog>
     </ui:define>
 

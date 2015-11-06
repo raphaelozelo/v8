@@ -63,7 +63,8 @@
             </p:submenu>
             <p:submenu id="rm_config" label="Configurações" icon="fa fa-gears">
                 <p:menuitem id="rm_mm" value="Marca/Modelo" icon="fa fa-ge" url="#" />
-                <p:menuitem id="rm_cadp" value="Cadrastro Próprio" icon="fa fa-file-powerpoint-o" url="#" />
+                <p:menuitem id="rm_cadp" value="Cadastro Próprio" icon="fa fa-file-powerpoint-o" url="#" />
+                <p:menuitem id="rm_operList" value="Listagem Operadores" icon="fa fa-list" action="diretor/config/listaOperadores.faces?faces-redirect=true" disabled="#{operadorMB.operadorLogado.nivel > 5}" />
             </p:submenu>
             <p:menuitem id="rm_sair" value="Logout" icon="fa fa-power-off" url="#"/>
     </pr:menu>
