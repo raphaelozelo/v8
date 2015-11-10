@@ -32,9 +32,9 @@ public class OperadorMB extends BaseMB{
     private static final String OPERADOR_TROCA_SENHA = "/adm/config/trocaSenha.faces?faces-redirect=true";
     private String userIcon;
     private Operador operadorSelecionado;
-    private Operador operadorSelecionadoInativo;
+    private Operador operadorSelecionadoInativo; //============================================================================
     private Operador operadorView;
-    private Boolean isEditar = false;
+    private Boolean isEditar = false; //=================================================================
     
     @NotNull(message = "Operador/Senha Inválidos!")
     @NotEmpty(message = "Operador/Senha Inválidos!")
@@ -50,6 +50,7 @@ public class OperadorMB extends BaseMB{
     
     private List<Operador> operadoresAtivos;
     private List<Operador> operadoresInativos;
+    private List<Operador> operadoresDemitidos;
     private List<Operador> operadoresApelidos;
     private List<Operador> aniversariantes;
     private Boolean euAniversariante = false;
@@ -264,6 +265,17 @@ public class OperadorMB extends BaseMB{
 
     public void setOperadoresInativos(List<Operador> operadoresInativos) {
         this.operadoresInativos = operadoresInativos;
+    }
+
+    public List<Operador> getOperadoresDemitidos() {
+        if (operadoresDemitidos == null) {
+            setOperadoresDemitidos(operadorService.getOperadoresDemitidos());
+        }
+        return operadoresDemitidos;
+    }
+
+    public void setOperadoresDemitidos(List<Operador> operadoresDemitidos) {
+        this.operadoresDemitidos = operadoresDemitidos;
     }
 
     public String getNewPassword() {

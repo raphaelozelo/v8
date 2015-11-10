@@ -50,13 +50,16 @@ public class OperadorDao extends BasicDao {
     }
     
     public List<Operador> getListOperadoresInativos() {
-        return getPureList(Operador.class, "select o from Operador o where o.ativo = false order by o.nome");
+        return getPureList(Operador.class, "select o from Operador o where o.ativo = false and o.demitido = false order by o.nome");
+    }
+    
+    public List<Operador> getListOperadoresDemitidos() {
+        return getPureList(Operador.class, "select o from Operador o where o.ativo = false and o.demitido = true order by o.nome");
     }
 
     public Operador getOperadorByApelido(String apelido) {
         apelido = apelido.toUpperCase();
         List <Operador> listaOperadores = new ArrayList<>();
-        System.out.println(listaOperadores.size());
         listaOperadores =  getPureList(Operador.class, "select o from Operador o where UPPER(o.apelido) = ?1",apelido);
         if (listaOperadores.isEmpty()) { return null;}
         return listaOperadores.get(0);

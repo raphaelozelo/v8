@@ -41,6 +41,45 @@
     </p:dataTable>  
             <p:commandButton id="newBT" value="Novo Operador" icon="ui-icon-circle-plus" action="#{operadorMB.doNovoOperador()}" />
         </p:tab>
+            <p:tab title="Inativos">
+                <p:dataTable id="operadorDT" var="operador" value="#{operadorMB.operadoresInativos}" 
+                         selectionMode="single" resizableColumns="true" selection="#{operadorMB.operadorView}" rowKey="#{operador.id}" >
+                <p:ajax event="rowSelect" process="operadorDT" update=":form:cadastroDetalhes" oncomplete="PF('dlgCadastro').show();"/>
+        <p:column headerText="Id" width="3%">
+            <h:outputText value="#{operador.id}" /></p:column>
+                 <p:column headerText="Apelido" width="18%">
+            <h:outputText value="#{operador.apelido}" /></p:column>
+                 <p:column headerText="Nome" width="45%">
+            <h:outputText value="#{operador.nome}" /></p:column>
+                 <p:column headerText="Função" width="10%">
+            <h:outputText value="#{operador.funcao}" /></p:column>
+                 <p:column headerText="Nv." width="2%">
+            <h:outputText value="#{operador.nivel}" /></p:column>
+                 <p:column headerText="Data Desativação" width="10%">
+                     <h:outputText value="#{operador.dtDesativacao}" >
+                     <f:convertDateTime pattern="dd/MM/yyyy" /></h:outputText></p:column>
+    </p:dataTable>  
+    </p:tab>
+                <p:tab title="Demitidos">
+                <p:dataTable id="operadorDT" var="operador" value="#{operadorMB.operadoresInativos}" 
+                         selectionMode="single" resizableColumns="true" selection="#{operadorMB.operadorView}" rowKey="#{operador.id}" >
+                <p:ajax event="rowSelect" process="operadorDT" update=":form:cadastroDetalhes" oncomplete="PF('dlgCadastro').show();"/>
+        <p:column headerText="Id" width="3%">
+            <h:outputText value="#{operador.id}" /></p:column>
+                 <p:column headerText="Apelido" width="18%">
+            <h:outputText value="#{operador.apelido}" /></p:column>
+                 <p:column headerText="Nome" width="45%">
+            <h:outputText value="#{operador.nome}" /></p:column>
+                 <p:column headerText="Função" width="10%">
+            <h:outputText value="#{operador.funcao}" /></p:column>
+             <p:column headerText="Data Admissão" width="10%">
+                 <h:outputText value="#{operador.dtAdmissao}" >
+                     <f:convertDateTime pattern="dd/MM/yyyy" /></h:outputText></p:column>
+                 <p:column headerText="Data Demissão" width="10%">
+                     <h:outputText value="#{operador.dtDesativacao}" >
+                     <f:convertDateTime pattern="dd/MM/yyyy" /></h:outputText></p:column>
+    </p:dataTable>  
+    </p:tab>
             </p:tabView>                
                         </div>
                     </div>

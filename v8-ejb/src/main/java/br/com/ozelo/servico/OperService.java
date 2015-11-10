@@ -69,6 +69,10 @@ public class OperService extends BasicService{
         return operadorDao.getListOperadoresInativos();
     }
     
+    public List<Operador> getOperadoresDemitidos() {
+        return operadorDao.getListOperadoresDemitidos();
+    }
+    
     public Operador getOperadorByLoginPassword(String apelido,String password) {
         try {
             return operadorDao.getOperadorByLoginPassword(apelido, password);
