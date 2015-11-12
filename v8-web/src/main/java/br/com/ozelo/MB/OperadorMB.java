@@ -71,6 +71,56 @@ public class OperadorMB extends BaseMB{
       }
     }
     
+    private void cleanCash(){
+       operadoresInativos = null;
+       operadoresAtivos = null;
+       operadoresDemitidos = null;
+    }
+    
+   public String changeAtivo(){
+      if (operadorView == null) return null;
+       operadorView.setAtivo(!operadorView.isAtivo());
+       if (!operadorView.isAtivo()){
+           operadorView.setDtDesativacao(new Date());
+       }
+      operadorService.atualizaOperador(operadorView);
+      fabricarLog(operadorLogado, 2, "Alterado o Estado do Operador: ["+operadorView.getApelido()+"]", operadorView);
+      cleanCash();
+      return OPERADOR_LISTA;
+  }
+
+   public String doDemitir(){
+        if (operadorView == null) return null;
+       operadorView.setAtivo(false);
+       operadorView.setNivel(0);
+       operadorView.setSenha("######");
+       operadorView.setDemitido(true);
+       operadorView.setDtDesativacao(new Date());
+       operadorService.atualizaOperador(operadorView);
+       fabricarLog(operadorLogado, 2, "Operador: ["+operadorView.getApelido()+"] Foi DEMITIDO", operadorView);
+       cleanCash();
+       return OPERADOR_LISTA;
+    }
+
+   public void doGerarSenhaProvissoria(){
+        if (operadorView == null) return;
+        operadorView.setSenha("123456");
+       operadorService.atualizaOperador(operadorView);
+       fabricarLog(operadorLogado, 2, "Foi Gerado Nova Senha Provissória Para O Operador: ["+operadorView.getApelido()+"]", operadorView);
+    }
+   
+    public String gerarNovaSenha(Operador operNovaSenha){
+             FacesContext context = FacesContext.getCurrentInstance();      
+      if (operNovaSenha != null){
+          operNovaSenha.gerarNovaSenha();
+          operadorService.atualizaOperador(operNovaSenha);
+        context.addMessage(null, new FacesMessage("Sucesso!",  "Foi Gerado uma Nova Senha Provissória para o Operador: "+operNovaSenha.getApelido()+" - "+operNovaSenha.getNome()) );
+        return null;
+      }
+   context.addMessage(null, new FacesMessage("Erro", "Não foi possível Gerar Nova Senha!"));
+   return null;
+  }
+       
     @SuppressWarnings("empty-statement")
     public String doEditarAtivo(){
         if (operadorSelecionado == null)  return null;
@@ -98,23 +148,10 @@ public class OperadorMB extends BaseMB{
            return OPERADOR_CADASTRO;
        }
     }
-    
-    public String doDemitir(Operador operadorDemitir){
-        if (operadorDemitir == null) return null;
-       operadorDemitir.setAtivo(false);
-       operadorDemitir.setNivel(0);
-       operadorDemitir.setSenha("######");
-       operadorDemitir.setDemitido(true);
-       operadorService.atualizaOperador(operadorDemitir);
-       operadoresInativos = null;
-       return OPERADOR_LISTA;
-    }
-    
+   
     public String doNovoOperador(){
-        isEditar = false;
-        operadorSelecionado = null;
-        operadorView = new Operador ();
-        operadorView.iniciar();
+       operadorView = new Operador ();
+   //     operadorView.iniciar(); ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
      return OPERADOR_NOVO_CADASTRO;    
     }
     public String addOperador(){
@@ -187,25 +224,6 @@ public class OperadorMB extends BaseMB{
    operadorService.atualizaOperador(operadorLogado);      
     return INDEX_PAGE;
 }
-  public String changeAtivo(Operador operadorChange){
-      operadorChange.setAtivo(!operadorChange.isAtivo());
-      operadorService.atualizaOperador(operadorChange);
-      operadoresAtivos = null;
-      operadoresInativos = null;
-      return OPERADOR_LISTA;
-  }
-
-  public String gerarNovaSenha(Operador operNovaSenha){
-             FacesContext context = FacesContext.getCurrentInstance();      
-      if (operNovaSenha != null){
-          operNovaSenha.gerarNovaSenha();
-          operadorService.atualizaOperador(operNovaSenha);
-        context.addMessage(null, new FacesMessage("Sucesso!",  "Foi Gerado uma Nova Senha Provissória para o Operador: "+operNovaSenha.getApelido()+" - "+operNovaSenha.getNome()) );
-        return null;
-      }
-   context.addMessage(null, new FacesMessage("Erro", "Não foi possível Gerar Nova Senha!"));
-   return null;
-  }
   
   public String ultimoAcessoOperador(){
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy  HH:mm");
@@ -217,7 +235,6 @@ public class OperadorMB extends BaseMB{
     } 
    
     public Operador buscaOperadorApelido (String apelido){
-        System.out.println("44"+apelido);
       return  operadorService.getOperadorByApelido(apelido);
     } 
   

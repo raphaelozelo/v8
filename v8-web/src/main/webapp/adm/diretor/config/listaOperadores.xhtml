@@ -20,29 +20,29 @@
                           <p:growl id="growl" showDetail="true" sticky="true" /> 
             <p:tabView >
         <p:tab title="Ativos">
-            <p:dataTable id="operadorDT" var="operador" value="#{operadorMB.operadoresAtivos}" 
+            <p:dataTable id="operadorDT" var="operador" value="#{operadorMB.operadoresAtivos}" class="semBorda"
                          selectionMode="single" resizableColumns="true" selection="#{operadorMB.operadorView}" rowKey="#{operador.id}" >
                 <p:ajax event="rowSelect" process="operadorDT" update=":form:cadastroDetalhes" oncomplete="PF('dlgCadastro').show();"/>
-        <p:column headerText="Id" width="3%">
+        <p:column headerText="Id" style="text-align: right" width="3%">
             <h:outputText value="#{operador.id}" /></p:column>
-                 <p:column headerText="Apelido" width="18%">
-            <h:outputText value="#{operador.apelido}" /></p:column>
+                 <p:column  headerText="Apelido" width="18%">
+                     <h:outputText value="#{operador.apelido}" /></p:column>
                  <p:column headerText="Nome" width="45%">
             <h:outputText value="#{operador.nome}" /></p:column>
                  <p:column headerText="Função" width="10%">
             <h:outputText value="#{operador.funcao}" /></p:column>
-                 <p:column headerText="Nv." width="2%">
+                 <p:column headerText="Nv." style="text-align: center" width="2%">
             <h:outputText value="#{operador.nivel}" /></p:column>
-                 <p:column headerText="Aces." width="4%" >
+                 <p:column headerText="Aces." style="text-align: right" width="4%" >
             <h:outputText value="#{operador.nrAcessos}" /></p:column>
                  <p:column headerText="Último Acesso" width="10%">
                   <h:outputText value="#{operador.dtUltAcesso}" >
                      <f:convertDateTime pattern="dd/MM/yyyy HH:mm" /></h:outputText></p:column>
-    </p:dataTable>  
-            <p:commandButton id="newBT" value="Novo Operador" icon="ui-icon-circle-plus" action="#{operadorMB.doNovoOperador()}" />
+    </p:dataTable>
+            <p:commandButton icon="icon-add Fs16 White" styleClass="Fright" value="Novo Operador" action="#{operadorMB.doNovoOperador()}" />
         </p:tab>
             <p:tab title="Inativos">
-                <p:dataTable id="operadorDT" var="operador" value="#{operadorMB.operadoresInativos}" 
+                <p:dataTable id="operadorDT" var="operador" value="#{operadorMB.operadoresInativos}" class="semBorda" emptyMessage="Sem Operadores Listados"
                          selectionMode="single" resizableColumns="true" selection="#{operadorMB.operadorView}" rowKey="#{operador.id}" >
                 <p:ajax event="rowSelect" process="operadorDT" update=":form:cadastroDetalhes" oncomplete="PF('dlgCadastro').show();"/>
         <p:column headerText="Id" width="3%">
@@ -61,7 +61,7 @@
     </p:dataTable>  
     </p:tab>
                 <p:tab title="Demitidos">
-                <p:dataTable id="operadorDT" var="operador" value="#{operadorMB.operadoresInativos}" 
+                <p:dataTable id="operadorDT" var="operador" value="#{operadorMB.operadoresInativos}" class="semBorda" emptyMessage="Sem Operadores Listados"
                          selectionMode="single" resizableColumns="true" selection="#{operadorMB.operadorView}" rowKey="#{operador.id}" >
                 <p:ajax event="rowSelect" process="operadorDT" update=":form:cadastroDetalhes" oncomplete="PF('dlgCadastro').show();"/>
         <p:column headerText="Id" width="3%">
@@ -142,13 +142,19 @@
          </h:panelGrid>
          </p:fieldset>
          </h:panelGrid>
+                <c:if test="#{operadorMB.operadorView.demitido == false}" >
                 <p:commandButton icon="fa fa-pencil Fs16 White" alt="Editar" styleClass="Fright BlueButton" actionListener="#{agendaMB.doDeletar}"  />
-                <p:commandButton icon="fa fa-unlock Fs16 White" alt="Gerar Senha Provisória" styleClass="Fright YellowButton" actionListener="#{agendaMB.doSalvar}"  />
-                <p:commandButton icon="fa fa-pencil Fs16 White" alt="Desativar Operador" styleClass="Fright RedButton" actionListener="#{agendaMB.doDeletar}"  />
-                <p:commandButton icon="fa fa-lock Fs16 White" alt="Demitir Operador" styleClass="Fright RedButton" actionListener="#{agendaMB.doSalvar}"  />
+                <p:commandButton icon="fa fa-unlock Fs16 White" alt="Gerar Senha Provisória" styleClass="Fright YellowButton"
+                                 onclick="return confirm('Têm Certeza Que Deseja GERAR SENHA PROVISSÓRIA Para Este Operador?');" action="#{doGerarSenhaProvissoria}"  />
+                <p:commandButton icon="fa fa-pencil Fs16 White" alt="Re-Ativar Operador" styleClass="Fright GreenButton" action="#{operadorMB.changeAtivo}"
+                                 rendered="#{operadorMB.operadorView.ativo == false}"/>
+                <p:commandButton icon="fa fa-pencil Fs16 White" alt="Desativar Operador" styleClass="Fright RedButton" action="#{operadorMB.changeAtivo}"
+                                 onclick="return confirm('Têm Certeza Que Deseja DESATIVAR Este Operador?');" rendered="#{operadorMB.operadorView.ativo == true}" disabled="#{operadorMB.operadorLogado.id == operadorMB.operadorView.id}"  />
+                <p:commandButton icon="fa fa-lock Fs16 White" alt="Demitir Operador" styleClass="Fright RedButton" action="#{operadorMB.doDemitir}"
+                                 onclick="return confirm('Você Têm Absoluta Certeza Que Deseja DEMITIR Este Operador?');" disabled="#{operadorMB.operadorLogado.id == operadorMB.operadorView.id}" />
+                </c:if>
                 <p:commandButton icon="fa fa-pencil Fs16 White" alt="Auditoria" styleClass="Fright YellowButton" actionListener="#{agendaMB.doDeletar}"  />
-                
-         </p:panel>
+          </p:panel>
         </p:dialog>
     </ui:define>
 
