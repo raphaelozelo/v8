@@ -96,4 +96,8 @@ return operadorDao.getOperadorByApelido(apelido);
     public List<Integer> getAlertas (Operador operador){
         return operadorDao.getAlertas(operador);
     }
+
+    public boolean isValidApelido(String apelido) {
+      return operadorDao.isValidApelido(apelido);
+    }
 }

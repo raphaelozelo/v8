@@ -25,9 +25,9 @@ public class OperadorMB extends BaseMB{
     
     private Operador operadorLogado;
    
-    private static final String OPERADOR_NOVO_CADASTRO = "/adm/diretor/config/operadorNovoCadastro.xhtml?faces-redirect=true";
+    private static final String OPERADOR_NOVO_CADASTRO = "/adm/diretor/config/novoOperador.xhtml?faces-redirect=true";
     private static final String OPERADOR_CADASTRO = "/adm/diretor/config/operadorCadastro.xhtml?faces-redirect=true";
-    private static final String OPERADOR_LISTA = "/adm/diretor/config/listOperador.xhtml?faces-redirect=true";
+    private static final String OPERADOR_LISTA = "/adm/diretor/config/listaOperadores.xhtml?faces-redirect=true";
     private static final String OPERADOR_DEMITIDO = "/adm/diretor/config/operadorDemitido.xhtml?faces-redirect=true";
     private static final String OPERADOR_TROCA_SENHA = "/adm/config/trocaSenha.faces?faces-redirect=true";
     private String userIcon;
@@ -75,6 +75,7 @@ public class OperadorMB extends BaseMB{
        operadoresInativos = null;
        operadoresAtivos = null;
        operadoresDemitidos = null;
+       operadorView = null;
     }
     
    public String changeAtivo(){
@@ -120,7 +121,30 @@ public class OperadorMB extends BaseMB{
    context.addMessage(null, new FacesMessage("Erro", "Não foi possível Gerar Nova Senha!"));
    return null;
   }
-       
+    
+   public String doNovoOperador(){
+       operadorView = new Operador ();
+       operadorView.iniciar();
+     return OPERADOR_NOVO_CADASTRO;    
+    } 
+    
+   public String doFinishAdd(){
+      if(!operadorService.isValidApelido(operadorView.getApelido())){
+          createFacesErrorMessage(null,"Apelido Inválido! Já Existe Cadastrado!");
+          return null;
+      }
+      operadorService.novoOperador(operadorView);
+      cleanCash();
+      return OPERADOR_LISTA;
+   }
+    
+   
+   
+ // ===================================================================================================
+    
+    
+    
+    
     @SuppressWarnings("empty-statement")
     public String doEditarAtivo(){
         if (operadorSelecionado == null)  return null;
@@ -149,11 +173,6 @@ public class OperadorMB extends BaseMB{
        }
     }
    
-    public String doNovoOperador(){
-       operadorView = new Operador ();
-   //     operadorView.iniciar(); ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-     return OPERADOR_NOVO_CADASTRO;    
-    }
     public String addOperador(){
        if (existsViolationsForJSF(operadorView)){
     return OPERADOR_NOVO_CADASTRO; 

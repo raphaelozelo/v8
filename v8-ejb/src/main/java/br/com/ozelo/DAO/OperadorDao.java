@@ -121,4 +121,9 @@ public class OperadorDao extends BasicDao {
         Integer size = (lista == null) ? 0 : lista.size();
         return size;
     }
+
+    public boolean isValidApelido(String apelido) {
+     Operador oper =  getPurePojo(Operador.class, "slect o from Operador o where UPPER(o.apelido) =?1", apelido.toUpperCase());
+     return (oper == null);
+    }
 }

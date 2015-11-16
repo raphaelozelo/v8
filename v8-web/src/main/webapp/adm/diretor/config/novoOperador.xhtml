@@ -9,25 +9,25 @@
     
     <ui:define name="content">
 
-            <div class="Container70">
+            <div class="Container60">
             <div class="ContainerIndent">
                 <div class="Card ShadowEffect  ">
-                    <div class="Container70">
+                    <div class="Container100">
                         <div class="ContainerIndent">
-                            <h2 class="BigTopic">Cadastro Próprio</h2>
-                            <p:messages/>
+                            <h2 class="BigTopic">Cadastro de Novo Operador</h2>
+                            <p:messages autoUpdate="true" />
                                 <h:panelGrid columns="1" cellpadding="5">
                                     <p:outputLabel for="apelido" value="Apelido:" class="formLabel"/>
                                     <p:inputText id="apelido" value="#{operadorMB.operadorView.apelido}" size="20" required="true"/>
 
                                     <p:outputLabel for="nome" value="Nome:" class="formLabel"/>
-                                    <p:inputText id="nome"  value="#{operadorMB.operadorView.nome}" maxlength="255" required="true"/>
+                                    <p:inputText id="nome"  value="#{operadorMB.operadorView.nome}" maxlength="255" style="width: 100%" required="true"/>
 
                                     <p:outputLabel for="funcao" value="Função:" class="formLabel" />
-                                    <p:inputText id="funcao" value="#{operadorMB.operadorView.funcao}" size="30" required="true"/>
+                                    <p:inputText id="funcao" value="#{operadorMB.operadorView.funcao}" size="30" required="true" />
 
                                     <p:outputLabel for="nivel" value="Nível Acesso:" class="formLabel"/>
-                                    <p:spinner id="nivel" value="#{operadorMB.operadorView.nivel}" min="1" max="5" size="1" />
+                                    <p:spinner id="nivel" value="#{operadorMB.operadorView.nivel}" min="1" max="5" required="true" />
                                     <p:outputLabel value="Data Admissão:" class="formLabel" />
                                     <p:calendar value="#{operadorMB.operadorView.dtAdmissao}" locale="pt" navigator="true" pattern="dd/MM/YYYY" />
                                     <p:outputLabel for="dtNasc" value="Data Nascimento:" class="formLabel" />
@@ -41,22 +41,21 @@
                                     
                                     <p:outputLabel for="email" value="e-Mail:" class="formLabel" />
                                     <p:inputText id="email" value="#{operadorMB.operadorView.email}" validatorMessage="e-Mail Inválido!" >
-                                    <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
                                     </p:inputText>
-                                       <p:row>
+                                  
             <p:fieldset legend=" Quadros de Avisos " >
                <h:panelGrid columns="2" >
-               <p:selectBooleanCheckbox itemLabel="Pendências Documentos Veículos  " value="#{operadorMB.operadorView.viewPendenciaVeic}"/>
-               <p:selectBooleanCheckbox itemLabel="Atualização do Site Loja" value="#{operadorMB.operadorView.viewAdmSite}"/>
+               <p:selectBooleanCheckbox itemLabel="Pendências De Veículos  " value="#{operadorMB.operadorView.viewPendenciaVeic}"/>
+               <p:selectBooleanCheckbox itemLabel="Atualizações do Site Loja" value="#{operadorMB.operadorView.viewAdmSite}"/>
                <p:selectBooleanCheckbox itemLabel="Contas à Pagar" value="#{operadorMB.operadorView.viewContasPagar}"/>
                <p:selectBooleanCheckbox itemLabel="Contas à Receber" value="#{operadorMB.operadorView.viewContasReceber}"/>
                </h:panelGrid>
            </p:fieldset>
                                     <p:separator/>
                                     <h:panelGroup>
-                                    <p:commandButton value="Confirma Inclusão" icon="fa fa-check-circle Fs16 White" action="#{operadorMB.editaProprio}" />
+                                        <p:commandButton value="Confirma Inclusão" icon="fa fa-check-circle Fs16 White" actionListener="#{operadorMB.doFinishAdd}" />
                                     &nbsp;
-                                    <p:commandButton value="Cancela Inclusão" icon="fa fa-ban Fs16 White" action="/adm/index.faces?faces-redirect=true" immediate="true" styleClass="RedButton"/>
+                                    <p:commandButton value="Cancela Inclusão" icon="fa fa-ban Fs16 White" action="/adm/diretor/config/listaOperadores.faces?faces-redirect=true" immediate="true" styleClass="RedButton"/>
                                     </h:panelGroup>
                                 </h:panelGrid>
                          
