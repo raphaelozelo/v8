@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 @Entity
 public class Lembrete implements Serializable {
@@ -38,6 +39,8 @@ public class Lembrete implements Serializable {
     private Date dataEvento;
     @Column (length = 7)
     private String corCss;
+    @Transient
+    private String nivelAlerta;
 
     public Lembrete() {
     }
@@ -135,6 +138,26 @@ public class Lembrete implements Serializable {
 
     public void setCorCss(String corCss) {
         this.corCss = corCss;
+    }
+
+    public String getNivelAlerta() {
+      this.nivelAlerta = null;
+        switch (this.nivel) {
+            case 3:
+                this.nivelAlerta = "Normal";
+                break;
+            case 2:
+                this.nivelAlerta = "Alta";
+                break;
+            default:
+                this.nivelAlerta = "Altissima";
+                break;
+        }
+        return nivelAlerta;
+    }
+
+    public void setNivelAlerta(String nivelAlerta) {
+        this.nivelAlerta = nivelAlerta;
     }
 
 

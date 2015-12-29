@@ -34,7 +34,7 @@ public class LembreteDao extends BasicDao {
     }
     
     public List<Lembrete> getListLembreteByOperador(Operador operador) {
-        return getPureList(Lembrete.class, "select l from Lembrete l where l.operador = ?1 order by l.nivel,l.dataEvento", operador);
+        return getPureList(Lembrete.class, "select l from Lembrete l where l.operador = ?1 order by l.nivel,l.dataEvento DESC", operador);
     }
     
     

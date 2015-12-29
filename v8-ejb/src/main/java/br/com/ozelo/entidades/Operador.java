@@ -14,6 +14,7 @@ import javax.annotation.PostConstruct;
 import javax.validation.constraints.Past;
 import org.hibernate.validator.constraints.Length;
 import java.text.SimpleDateFormat;
+import org.hibernate.validator.constraints.Email;
 
 
 @Entity
@@ -36,6 +37,7 @@ private String sexo;
 @NotNull (message="Função do Operador Deve Ser Informado!")
 private String funcao;
 @Column
+@Email (message = "e-Mail Inválido!")
 private String email;
 @Column 
 @NotNull (message="Senha Deve Ser Informada!")
