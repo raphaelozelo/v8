@@ -19,6 +19,10 @@
     font-size: small;
 }
 
+.blackFont{
+    color: Black;
+}
+
 .semBorda{
     border: none !important;
 }

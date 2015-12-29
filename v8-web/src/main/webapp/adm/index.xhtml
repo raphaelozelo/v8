@@ -85,12 +85,12 @@
     <div class="ShadowEffect">
         <p:panel class="#{lembrete.corCss}" style="height: 210px;" >
                 <h:panelGroup style="width: 100%">
-             <p:commandButton rendered="#{lembrete.nivelAlerta eq 'Normal'}" icon="icon-halffilled1 Fs18" type="button" styleClass="Fleft GrayButton" action="#{lembreteMB.viewModal()}" >
-                <f:param name="id" value="#{lembrete.id}" /></p:commandButton>
-            <p:commandButton rendered="#{lembrete.nivelAlerta eq 'Alta'}" icon="icon-brightness Fs18 Red" type="button" styleClass="OrangeButton" action="#{lembreteMB.viewModal()}" style="float: left;" >
-                <f:param name="id" value="#{lembrete.id}" /> </p:commandButton>
-            <p:commandButton rendered="#{lembrete.nivelAlerta eq 'Altissima'}" icon="icon-exclamation Fs20 Yellow" type="button" styleClass="RedButton" action="#{lembreteMB.viewModal()}" style="float: left;" >
-                <f:param name="id" value="#{lembrete.id}" /> </p:commandButton>
+                <p:commandLink rendered="#{lembrete.nivelAlerta eq 'Normal'}"  type="button" styleClass="Fleft" action="#{lembreteMB.viewModal()}" >
+                 <f:param name="id" value="#{lembrete.id}" /><i class="icon-round54 blackFont Fs30"></i></p:commandLink>
+                <p:commandLink rendered="#{lembrete.nivelAlerta eq 'Alta'}" type="button" action="#{lembreteMB.viewModal()}" styleClass="Fleft" >
+                 <f:param name="id" value="#{lembrete.id}" /><i class="icon-report blackFont Fs30"></i></p:commandLink>
+                <p:commandLink rendered="#{lembrete.nivelAlerta eq 'Altissima'}" type="button" styleClass="Fleft" action="#{lembreteMB.viewModal()}" >
+                 <f:param name="id" value="#{lembrete.id}" /><i class="icon-turn20 Red Fs30 animated swing infinite"></i></p:commandLink>
                      <a style="float:right;"><i class="fa fa-thumb-tack Fs21" ></i><h:outputLabel value="#{lembrete.dataEventoPTBRSmall()}" style="padding-left:45px; text-align:right; font-size:smaller"/></a>
                      </h:panelGroup>
                     <br/><br/>
@@ -109,23 +109,24 @@
     
     
         <p:dialog id="lembreteView" widgetVar="lembreteDialog" resizable="false" width="420px" height="360px"
-                  dynamic="true" showEffect="clip" hideEffect="clip" modal="true" class="#{lembreteMB.lembreteSelecionado.corCss} !important;" >
+                  dynamic="true" showEffect="clip" hideEffect="clip" modal="true" showHeader="false" >
             <h:panelGrid columns="1" class="#{lembreteMB.lembreteSelecionado.corCss}" style="width: 100%; height: 100%; padding: 2px;" >
+                <p:focus context="panelButton" />
                 <h:panelGroup id="lembreteCabecalho">
-              <p:commandButton rendered="#{lembreteMB.lembreteSelecionado.nivelAlerta eq 'Normal'}" icon="icon-halffilled1 Fs16 " styleClass="GrayButton" action="#{lembreteMB.changeNivel()}" style="float: left;">
-                  <f:param name="id" value="#{lembreteMB.lembreteSelecionado.id}" /></p:commandButton>
-                <p:commandButton rendered="#{lembreteMB.lembreteSelecionado.nivelAlerta eq 'Alta'}" icon="icon-brightness Fs16 Red" styleClass="OrangeButton" action="#{lembreteMB.changeNivel()}" style="float: left;"
-                                 update="lembreteCabecalho" ><f:param name="id" value="#{lembreteMB.lembreteSelecionado.id}" /> </p:commandButton>
-                <p:commandButton rendered="#{lembreteMB.lembreteSelecionado.nivelAlerta eq 'Altissima'}" icon="icon-exclamation Fs19 Yellow" styleClass="RedButton" action="#{lembreteMB.changeNivel()}" style="float: left;" >
-                <f:param name="id" value="#{lembreteMB.lembreteSelecionado.id}" /> </p:commandButton>
+            <p:commandLink rendered="#{lembreteMB.lembreteSelecionado.nivelAlerta eq 'Normal'}" type="button" styleClass="Fleft" action="#{lembreteMB.changeNivel()}" update="lembreteCabecalho" >
+                <f:param name="id" value="#{lembreteMB.lembreteSelecionado.id}" /><i class="icon-round54 blackFont Fs30"></i></p:commandLink>
+            <p:commandLink rendered="#{lembreteMB.lembreteSelecionado.nivelAlerta eq 'Alta'}" type="button" styleClass="Fleft" action="#{lembreteMB.changeNivel()}" update="lembreteCabecalho" >
+               <f:param name="id" value="#{lembreteMB.lembreteSelecionado.id}" /><i class="icon-report blackFont Fs30"></i></p:commandLink>
+            <p:commandLink rendered="#{lembrete.nivelAlerta eq 'Altissima'}" type="button" styleClass="Fleft" action="#{lembreteMB.changeNivel()}" update="lembreteCabecalho" >
+                <f:param name="id" value="#{lembreteMB.lembreteSelecionado.id}" /><i class="icon-turn20 Red Fs30 animated swing infinite"></i></p:commandLink> 
            <a style="float:right;"><i class="fa fa-thumb-tack Fs21" ></i><h:outputLabel value="#{lembreteMB.lembreteSelecionado.dataEventoPTBR}" style="padding-left:90px; text-align:right; font-size:smaller"/></a>
            </h:panelGroup>
              <h:outputLabel value=" Lembrar que:" rendered="#{lembreteMB.lembreteSelecionado.operador eq lembreteMB.lembreteSelecionado.operadorIndicou}"/>
              <h:outputLabel value=" #{lembreteMB.lembreteSelecionado.operadorIndicou.apelido} Lembrou que Você Têm:" class="capitalizar" rendered="#{lembreteMB.lembreteSelecionado.operador ne lembreteMB.lembreteSelecionado.operadorIndicou}"/>
              <p:inputTextarea value="#{lembreteMB.lembreteSelecionado.descricao}" autoResize="false" rows="8" class="lembretDesc" />
-            <h:panelGroup>
-            <p:commandButton icon="fa fa-check Fs16 White" styleClass="Fright BlueButton" actionListener="#{lembreteMB.okLembrete}"  />
-            <p:commandButton icon="fa fa-trash Fs16 White" styleClass="Fright RedButton" actionListener="#{lembreteMB.doDeletar}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
+             <h:panelGroup id="panelButton">
+            <p:commandButton id="btOk" icon="fa fa-check Fs16 White" styleClass="Fright BlueButton" actionListener="#{lembreteMB.okLembrete}" />
+            <p:commandButton  icon="fa fa-trash Fs16 White" styleClass="Fright RedButton" actionListener="#{lembreteMB.doDeletar}" />
             </h:panelGroup>           
           
          </h:panelGrid>      
