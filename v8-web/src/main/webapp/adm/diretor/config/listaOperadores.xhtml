@@ -142,19 +142,22 @@
          </h:panelGrid>
          </p:fieldset>
          </h:panelGrid>
+               <p:commandButton icon="fa fa-pencil Fs16 White" title="Auditoria" styleClass="Fright YellowButton" actionListener="#"  ><f:param name="id" value="#{operadorMB.operadorView.id}" /></p:commandButton>
                 <c:if test="#{operadorMB.operadorView.demitido == false}" >
-                    <p:commandButton icon="fa fa-pencil Fs16 White" title="Editar" styleClass="Fright BlueButton" actionListener="#{agendaMB.doDeletar}"  />
-                <p:commandButton icon="fa fa-unlock Fs16 White" title="Gerar Senha Provisória" styleClass="Fright YellowButton"
-                                 onclick="return confirm('Têm Certeza Que Deseja GERAR SENHA PROVISSÓRIA Para Este Operador?');" action="#{doGerarSenhaProvissoria}"  />
-                <p:commandButton icon="fa fa-pencil Fs16 White" title="Re-Ativar Operador" styleClass="Fright GreenButton" action="#{operadorMB.changeAtivo}"
-                                 rendered="#{operadorMB.operadorView.ativo == false}"/>
-                <p:commandButton icon="fa fa-pencil Fs16 White" title="Desativar Operador" styleClass="Fright RedButton" action="#{operadorMB.changeAtivo}"
-                                 onclick="return confirm('Têm Certeza Que Deseja DESATIVAR Este Operador?');" rendered="#{operadorMB.operadorView.ativo == true}" disabled="#{operadorMB.operadorLogado.id == operadorMB.operadorView.id}"  />
                 <p:commandButton icon="fa fa-lock Fs16 White" title="Demitir Operador" styleClass="Fright RedButton" action="#{operadorMB.doDemitir}"
-                                 onclick="return confirm('Você Têm Absoluta Certeza Que Deseja DEMITIR Este Operador?');" disabled="#{operadorMB.operadorLogado.id == operadorMB.operadorView.id}" />
+                                 onclick="return confirm('Você Têm Absoluta Certeza Que Deseja DEMITIR Este Operador?');" disabled="#{operadorMB.operadorLogado.id == operadorMB.operadorView.id}" ><f:param name="id" value="#{operadorMB.operadorView.id}" /></p:commandButton>
+                <p:commandButton icon="fa fa-pencil Fs16 White" title="Desativar Operador" styleClass="Fright RedButton" action="#{operadorMB.changeAtivo}"
+                                 onclick="return confirm('Têm Certeza Que Deseja DESATIVAR Este Operador?');" rendered="#{operadorMB.operadorView.ativo == true}" disabled="#{operadorMB.operadorLogado.id == operadorMB.operadorView.id}" ><f:param name="id" value="#{operadorMB.operadorView.id}" /></p:commandButton>
+                <p:commandButton icon="fa fa-pencil Fs16 White" title="Re-Ativar Operador" styleClass="Fright GreenButton" action="#{operadorMB.changeAtivo}"
+                                 rendered="#{operadorMB.operadorView.ativo == false}"><f:param name="id" value="#{operadorMB.operadorView.id}" /></p:commandButton>
+                <p:commandButton icon="fa fa-unlock Fs16 White" title="Gerar Senha Provisória" styleClass="Fright YellowButton"
+                                 onclick="return confirm('Têm Certeza Que Deseja GERAR SENHA PROVISSÓRIA Para Este Operador?');" actionListener="#{doGerarSenhaProvissoria}"  >
+                <f:param name="id" value="#{operadorMB.operadorView.id}" /></p:commandButton>
+                <p:commandButton icon="fa fa-pencil Fs16 White" title="Editar" styleClass="Fright BlueButton" action="#{operadorMB.doEditar}" >
+                    <f:param name="id" value="#{operadorMB.operadorView.id}" />
+                     </p:commandButton>
                 </c:if>
-                <p:commandButton icon="fa fa-pencil Fs16 White" title="Auditoria" styleClass="Fright YellowButton" actionListener="#{agendaMB.doDeletar}"  />
-          </p:panel>
+           </p:panel>
         </p:dialog>
     </ui:define>
 

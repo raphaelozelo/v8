@@ -9,6 +9,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
@@ -91,8 +92,12 @@ public boolean isDatasCertas(){
 }
 
 public void doSalvar(){
+    if (eventoSelecionado.getTitle().isEmpty() || eventoSelecionado.getTitle() == null) {
+         createFacesErrorMessage("Título É Obrigatório!", "");
+         return;
+    }
      if (isDatasCertas()== false){
-         createFacesErrorMessage("", "Data Inicial Deve Ser Anterior A Final!");
+         createFacesErrorMessage("Data/Hora Inicial Deve ser Anterior A Final!", "");
          return;
      }
      Evento novoEvento = retornaEvento(eventoSelecionado);
@@ -102,6 +107,8 @@ public void doSalvar(){
         eventoService.atualizaEvento(novoEvento);
     }
     carregaListaEventos();
+    RequestContext.getCurrentInstance().execute("PF('eventDialog').hide();");
+    RequestContext.getCurrentInstance().execute("PF('myschedule').update();");
 }
 
 public void doDeletar (){

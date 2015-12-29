@@ -18,7 +18,7 @@
                             <p:messages autoUpdate="true" />
                                 <h:panelGrid columns="1" cellpadding="5">
                                     <p:outputLabel for="apelido" value="Apelido:" class="formLabel"/>
-                                    <p:inputText id="apelido" value="#{operadorMB.operadorView.apelido}" size="20" required="true"/>
+                                    <p:inputText id="apelido" value="#{operadorMB.operadorView.apelido}" maxlength="20" size="20" required="true"/>
 
                                     <p:outputLabel for="nome" value="Nome:" class="formLabel"/>
                                     <p:inputText id="nome"  value="#{operadorMB.operadorView.nome}" maxlength="255" style="width: 100%" required="true"/>
@@ -53,9 +53,9 @@
            </p:fieldset>
                                     <p:separator/>
                                     <h:panelGroup>
-                                        <p:commandButton value="Confirma Inclusão" icon="fa fa-check-circle Fs16 White" actionListener="#{operadorMB.doFinishAdd}" />
+                                        <p:commandButton value="Confirma Inclusão" icon="fa fa-check-circle Fs16 White" action="#{operadorMB.doFinishAdd}" />
                                     &nbsp;
-                                    <p:commandButton value="Cancela Inclusão" icon="fa fa-ban Fs16 White" action="/adm/diretor/config/listaOperadores.faces?faces-redirect=true" immediate="true" styleClass="RedButton"/>
+                                    <p:commandButton value="Cancela Inclusão" icon="fa fa-ban Fs16 White" action="#{operadorMB.goListaOperadores}" immediate="true" styleClass="RedButton"/>
                                     </h:panelGroup>
                                 </h:panelGrid>
                          

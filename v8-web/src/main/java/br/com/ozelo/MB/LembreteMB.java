@@ -5,17 +5,18 @@ import br.com.ozelo.servico.LembreteService;
 import java.util.List;
 import javax.ejb.EJB;
 import java.util.Date;
+import java.util.Map;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.primefaces.context.RequestContext;
 
 
 @Named
 @SessionScoped
 public class LembreteMB extends BaseMB{
-    
-    private static final String LEMBRETE_SITE = "/v7/adm/lembrete.faces?faces-redirect=true";
-    
+ 
     @EJB
     private LembreteService lembreteService;
     
@@ -24,32 +25,21 @@ public class LembreteMB extends BaseMB{
  
     private List<Lembrete> lembretes; 
     private Lembrete lembreteSelecionado;
-    private Integer lembreteCashNivel;
-    private String lembreteCashDesc;
 
     public LembreteMB() {
-        
     }
-
-    public void startLembretes(){
-        novoLembrete();
-        lembreteSelecionado.setDescricao("Teste 1 dos Lembretes atuais para operador 1");
-        addLembrete();
-        lembreteSelecionado.setDescricao("Teste 2 dos Lembretes atuais para operador 1");
-        addLembrete();
-        lembreteSelecionado.setDescricao("Teste 3 dos Lembretes atuais para operador 1");
-        addLembrete();
-        lembreteSelecionado.setDescricao("Teste 4 dos Lembretes atuais para operador 1");
-        addLembrete();
-        lembreteSelecionado.setDescricao("Teste 5 dos Lembretes atuais para operador 1");
-        addLembrete();
-        lembreteSelecionado.setDescricao("Teste 6 dos Lembretes atuais para operador 1");
-        addLembrete();
-        lembreteSelecionado.setDescricao("Teste 7 dos Lembretes atuais para operador 1");
-        addLembrete();
-        lembreteSelecionado.setDescricao("Teste 8 dos Lembretes atuais para operador 1");
-        addLembrete();
-        
+    
+        private Lembrete findByParam(){
+     FacesContext facesContext = FacesContext.getCurrentInstance();
+        Map<String,String> params = facesContext.getExternalContext().getRequestParameterMap();
+          if(params.get("id") == null) return null;
+           Integer id = Integer.parseInt(params.get("id"));
+            return lembreteService.getLembreteById(id);
+        } 
+    
+    public void viewModal(){
+    lembreteSelecionado = findByParam();
+    RequestContext.getCurrentInstance().execute("PF('lembreteDialog').show();");     
     }
     
     public void cleanCash(){
@@ -59,7 +49,7 @@ public class LembreteMB extends BaseMB{
     
 public void novoLembrete(){
     lembreteSelecionado = new Lembrete();
-    lembreteSelecionado.setCorCss("#FDF701");
+    lembreteSelecionado.setCorCss("fdLight");
     lembreteSelecionado.setNivel(3);
     lembreteSelecionado.setDataEvento(new Date());
     lembreteSelecionado.setDescricao("");
@@ -73,26 +63,28 @@ public void addLembrete(){
 }
 
 public void changeNivel(){
+    lembreteSelecionado = findByParam();
     Integer i = lembreteSelecionado.getNivel();
-    i = i-1;
+    i = ++i;
     if (i==0) {i=3;}
     lembreteSelecionado.setNivel(i);  
 }
-public void cashLembrete(){
-    lembreteCashNivel = lembreteSelecionado.getNivel();
-    lembreteCashDesc = lembreteSelecionado.getDescricao();
+
+public void doDeletar(){
+    if (lembreteSelecionado != null){
+    lembreteService.removeLembrete(lembreteSelecionado);
+    }
+    RequestContext.getCurrentInstance().execute("PF('lembreteDialog').hide();");
 }
 
-public void deleteLembrete(){
-    lembreteService.removeLembrete(lembreteSelecionado);
-}
     public void okLembrete(){
-       if ((lembreteCashNivel.equals(lembreteSelecionado.getNivel()))||(lembreteCashDesc.equals(lembreteSelecionado.getDescricao()))){
+       if (lembreteSelecionado != null){
         lembreteService.atualizaLembrete(lembreteSelecionado);
-    }        
+    }  
+       RequestContext.getCurrentInstance().execute("PF('lembreteDialog').hide();");
     }
     
-    public List<Lembrete> getLembretes() {
+    public List<Lembrete> getLembretes() {  //****************************************************************************************************
         if (lembretes == null){
             setLembretes(lembreteService.getListLembrete());
 //           setLembretes(lembreteService.getListLembreteByOperador(operadorMB.getOperadorLogado().getId()));

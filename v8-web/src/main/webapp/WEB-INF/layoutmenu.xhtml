@@ -11,7 +11,7 @@
        <ul class="layout-menu">
             <li>
                 <a class="menulink ripplelink">
-                    <p:graphicImage name="#{operadorMB.userIcon}" library="img" class="Fs40"/>
+                    <i class="oz-userMasc Fs40"></i>
                     <span class="Fs18">#{operadorMB.nomeSobrenome(operadorMB.operadorLogado.nome)}<i class="icon-downwards Fright Fs20"></i><br /><span class="Fs12 FontRobotoLight">#{operadorMB.operadorLogado.apelido}  |  #{operadorMB.operadorLogado.funcao}</span></span>
                     <br /><i class="fa fa-history Fs12"></i><span class="Fs12 FontRobotoLight"> #{operadorMB.ultimoAcessoOperador()} | nº #{operadorMB.operadorLogado.nrAcessos}</span>
                 </a>
@@ -30,7 +30,7 @@
                     <c:if test="#{operadorMB.operadorLogado.viewContasReceber}">
                     <li><a href="#" class="menulink ripplelink"><i class="fa fa-money Fs16"></i> Contas À Receber</a></li>
                     </c:if>
-                    <li><a href="../adm/config/cadProprio.faces" class="menulink ripplelink"><i class="fa fa-file-powerpoint-o Fs16"></i> Cadastro Próprio</a></li>
+                    <li><a href="#" class="menulink ripplelink"><i class="fa fa-file-powerpoint-o Fs16"></i> Cadastro Próprio</a></li>
                     <li><a href="#" class="menulink ripplelink"><i class="fa fa-power-off Fs16"></i> Logout</a></li>
                 </ul>
             </li>
@@ -57,16 +57,16 @@
                 <p:separator/>
                 <p:menuitem id="rm_forn" value="Fornecedores" icon="fa fa-wrench" url="#" /> 
             </p:submenu>
-            <p:submenu id="rm_pagar_rec" label="Contas Pagar/Receber" icon="fa fa-bank">
+            <p:submenu id="rm_pagar_rec" label="Contas Pagar/Receber" icon="oz-cofre">
                 <p:menuitem id="rm_cp" value="À Pagar" icon="fa fa-barcode" url="#" />
                 <p:menuitem id="rm_cr" value="à Receber" icon="fa fa-money" url="#" />
             </p:submenu>
             <p:submenu id="rm_config" label="Configurações" icon="fa fa-gears">
                 <p:menuitem id="rm_mm" value="Marca/Modelo" icon="fa fa-ge" url="#" />
-                <p:menuitem id="rm_cadp" value="Cadastro Próprio" icon="fa fa-file-powerpoint-o" url="#" />
-                <p:menuitem id="rm_operList" value="Listagem Operadores" icon="fa fa-list" action="diretor/config/listaOperadores.faces?faces-redirect=true" disabled="#{operadorMB.operadorLogado.nivel > 5}" />
+                <p:menuitem id="rm_cadp" value="Cadastro Próprio" icon="fa fa-file-powerpoint-o" action="#{operadorMB.goCadProprio}" />
+                <p:menuitem id="rm_operList" value="Listagem Operadores" icon="fa fa-list" action="#{operadorMB.goListaOperadores}" />
             </p:submenu>
-            <p:menuitem id="rm_sair" value="Logout" icon="fa fa-power-off" url="#"/>
+            <p:menuitem id="rm_sair" value="Logout" icon="oz-power5" url="#"/>
     </pr:menu>
 
     </div>

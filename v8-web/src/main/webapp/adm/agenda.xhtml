@@ -20,12 +20,10 @@
                 <p:ajax event="dateSelect" listener="#{agendaMB.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
                 <p:ajax event="eventSelect" listener="#{agendaMB.eventoClicado}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
           </p:schedule>
-            <p:dialog widgetVar="eventDialog" header="Compromisso" showEffect="clip" hideEffect="clip" showHeader="true" resizable="false">
-                <p:messages autoUpdate="true" />    
+            <p:dialog id="eventDlg" widgetVar="eventDialog" modal="true" header="Compromisso" showEffect="clip" hideEffect="clip" showHeader="true" resizable="false">
         <h:panelGrid id="eventDetails" columns="1">
-            <p:inputText id="title" value="#{agendaMB.eventoSelecionado.title}" maxlength="50" required="true" size="50"
-                         placeholder="Título"  />
- 
+            <p:messages autoUpdate="true" /> 
+            <p:inputText id="Titulo" value="#{agendaMB.eventoSelecionado.title}" maxlength="50" size="50" placeholder="Título"/>
             <h:panelGroup><i class="icon-set6 "> </i>
                 <p:calendar value="#{agendaMB.eventoSelecionado.startDate}" locale="pt" timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy HH:mm" />
             </h:panelGroup>  
@@ -33,12 +31,11 @@
                 <p:calendar value="#{agendaMB.eventoSelecionado.endDate}" locale="pt" timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy HH:mm"/>
             </h:panelGroup>
             <p:selectBooleanCheckbox value="#{agendaMB.eventoSelecionado.allDay}" styleClass="Fleft" itemLabel="Todo o Dia"/>
- 
             <p:inputTextarea value="#{agendaMB.eventoSelecionado.description}" rows="3" maxlength="255" placeholder="Descrição" style="width: 100%"/>
             <p:separator/>
             <h:panelGroup>
+                <p:commandButton icon="fa fa-check Fs16 White" styleClass="Fright BlueButton" actionListener="#{agendaMB.doSalvar}" />
             <p:commandButton icon="fa fa-trash Fs16 White" styleClass="Fright RedButton" actionListener="#{agendaMB.doDeletar}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
-              <p:commandButton icon="fa fa-check Fs16 White" styleClass="Fright BlueButton" actionListener="#{agendaMB.doSalvar}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
             </h:panelGroup>
         </h:panelGrid>
     </p:dialog>  

@@ -7,14 +7,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;        
+import org.primefaces.context.RequestContext;
         
 @Named
 @SessionScoped
@@ -24,17 +25,19 @@ public class OperadorMB extends BaseMB{
     private OperService operadorService;
     
     private Operador operadorLogado;
-   
+
+    private static final String PAG_SEM_ACESSO = "../semAcesso.xhtml?faces-redirect=true";
+    private static final String LEMBRETE = "../adm/lembrete.xhtml?faces-redirect=true";
+    private static final String AGENDA = "../adm/agenda.xhtml?faces-redirect=true";
     private static final String OPERADOR_NOVO_CADASTRO = "/adm/diretor/config/novoOperador.xhtml?faces-redirect=true";
     private static final String OPERADOR_CADASTRO = "/adm/diretor/config/operadorCadastro.xhtml?faces-redirect=true";
     private static final String OPERADOR_LISTA = "/adm/diretor/config/listaOperadores.xhtml?faces-redirect=true";
-    private static final String OPERADOR_DEMITIDO = "/adm/diretor/config/operadorDemitido.xhtml?faces-redirect=true";
     private static final String OPERADOR_TROCA_SENHA = "/adm/config/trocaSenha.faces?faces-redirect=true";
+    private static final String OPERADOR_CAD_PROPRIO = "/adm/config/cadProprio.faces?faces-redirect=true";
     private String userIcon;
     private Operador operadorSelecionado;
-    private Operador operadorSelecionadoInativo; //============================================================================
-    private Operador operadorView;
-    private Boolean isEditar = false; //=================================================================
+   private Operador operadorView;
+    private Boolean isEditar = false; 
     
     @NotNull(message = "Operador/Senha Inválidos!")
     @NotEmpty(message = "Operador/Senha Inválidos!")
@@ -56,7 +59,7 @@ public class OperadorMB extends BaseMB{
     private Boolean euAniversariante = false;
     private List <Integer> nAlertas = new ArrayList();
     private List <String> cssAlertas = new ArrayList(); 
-    
+     
     public OperadorMB() {
     }
     
@@ -78,7 +81,16 @@ public class OperadorMB extends BaseMB{
        operadorView = null;
     }
     
+    private Operador findByParam(){
+     FacesContext facesContext = FacesContext.getCurrentInstance();
+        Map<String,String> params = facesContext.getExternalContext().getRequestParameterMap();
+          if(params.get("id") == null) return null;
+           Integer id = Integer.parseInt(params.get("id"));
+            return operadorService.getOperadorById(id);
+        }      
+    
    public String changeAtivo(){
+       operadorView = findByParam();
       if (operadorView == null) return null;
        operadorView.setAtivo(!operadorView.isAtivo());
        if (!operadorView.isAtivo()){
@@ -91,6 +103,7 @@ public class OperadorMB extends BaseMB{
   }
 
    public String doDemitir(){
+       operadorView = findByParam();
         if (operadorView == null) return null;
        operadorView.setAtivo(false);
        operadorView.setNivel(0);
@@ -104,23 +117,12 @@ public class OperadorMB extends BaseMB{
     }
 
    public void doGerarSenhaProvissoria(){
+       operadorView = findByParam();
         if (operadorView == null) return;
         operadorView.setSenha("123456");
        operadorService.atualizaOperador(operadorView);
        fabricarLog(operadorLogado, 2, "Foi Gerado Nova Senha Provissória Para O Operador: ["+operadorView.getApelido()+"]", operadorView);
     }
-   
-    public String gerarNovaSenha(Operador operNovaSenha){
-             FacesContext context = FacesContext.getCurrentInstance();      
-      if (operNovaSenha != null){
-          operNovaSenha.gerarNovaSenha();
-          operadorService.atualizaOperador(operNovaSenha);
-        context.addMessage(null, new FacesMessage("Sucesso!",  "Foi Gerado uma Nova Senha Provissória para o Operador: "+operNovaSenha.getApelido()+" - "+operNovaSenha.getNome()) );
-        return null;
-      }
-   context.addMessage(null, new FacesMessage("Erro", "Não foi possível Gerar Nova Senha!"));
-   return null;
-  }
     
    public String doNovoOperador(){
        operadorView = new Operador ();
@@ -130,59 +132,34 @@ public class OperadorMB extends BaseMB{
     
    public String doFinishAdd(){
       if(!operadorService.isValidApelido(operadorView.getApelido())){
-          createFacesErrorMessage(null,"Apelido Inválido! Já Existe Cadastrado!");
+          createFacesErrorMessage("Apelido Inválido! Já Existe Cadastrado!",null);
           return null;
       }
       operadorService.novoOperador(operadorView);
+       fabricarLog(operadorLogado, 3, "Foi adicionado novo Operador ao Sistema: ["+operadorView.getApelido()+"]", operadorView);
       cleanCash();
       return OPERADOR_LISTA;
    }
     
-   
-   
- // ===================================================================================================
-    
-    
-    
-    
-    @SuppressWarnings("empty-statement")
-    public String doEditarAtivo(){
-        if (operadorSelecionado == null)  return null;
-       isEditar = true;
-        operadorView = operadorSelecionado;
+   public String doEditar(){
+        operadorView = findByParam();
+        RequestContext.getCurrentInstance().execute("PF('dlgCadastro').hide();"); 
         return OPERADOR_CADASTRO;
-    }
-    
-    public String doFinishEditaAtido(){
-        if (existsViolationsForJSF(operadorView)){
-    return OPERADOR_CADASTRO;
-       } 
-       operadorService.atualizaOperador(operadorView);
-      return OPERADOR_LISTA;   
-    }
-    
-    public String doViewDemitido(){
-        if (operadorSelecionadoInativo == null)  return null; 
-           operadorView = operadorSelecionadoInativo;
-        
-       if (operadorSelecionadoInativo.isDemitido()){
-          return OPERADOR_DEMITIDO;
-       }else{
-           isEditar = true;
-           return OPERADOR_CADASTRO;
-       }
-    }
+   }
    
-    public String addOperador(){
-       if (existsViolationsForJSF(operadorView)){
-    return OPERADOR_NOVO_CADASTRO; 
-       } 
-        operadorService.novoOperador(operadorView);
-         fabricarLog(operadorLogado, 2, "Cadastrado Novo Operador: ["+operadorView.getApelido()+"]"+operadorView.getNome(), operadorView);
-        operadoresAtivos = null;
-       return OPERADOR_LISTA; 
-    }
-    
+   public String doFinishEdit(){
+       operadorService.atualizaOperador(operadorView);
+        fabricarLog(operadorLogado, 2, "Alterado Dados do Operador: ["+operadorView.getApelido()+"]", operadorView);
+       cleanCash();
+       return OPERADOR_LISTA;
+   }
+   
+     public String editaProprio(){
+   operadorService.atualizaOperador(operadorLogado); 
+    fabricarLog(operadorLogado, 2, "Alterado Dados do Próprio Cadastro: ["+operadorLogado.getApelido()+"]", operadorLogado);
+    return INDEX_PAGE;
+}
+     
   public String doLogin() {
         operadorLogado = null;
         operadorLogado = operadorService.getOperadorByLoginPassword(apelido, password);
@@ -238,12 +215,7 @@ public class OperadorMB extends BaseMB{
               return null;
            }
   }
-   
-  public String editaProprio(){
-   operadorService.atualizaOperador(operadorLogado);      
-    return INDEX_PAGE;
-}
-  
+
   public String ultimoAcessoOperador(){
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy  HH:mm");
     return sdf.format(operadorLogado.getDtUltAcesso());
@@ -256,7 +228,31 @@ public class OperadorMB extends BaseMB{
     public Operador buscaOperadorApelido (String apelido){
       return  operadorService.getOperadorByApelido(apelido);
     } 
-  
+//====================================================================================================     
+   private String nivelPermissao (String pagDestino, Integer nivelMinimo){
+     if (operadorLogado.getNivel() >= nivelMinimo) return pagDestino;
+     return PAG_SEM_ACESSO;
+   }
+   
+   
+   
+   
+   public String goCadProprio(){
+       return OPERADOR_CAD_PROPRIO;
+   }
+   
+   public String goAgenda(){
+       return AGENDA;
+   }
+   
+   public String goLembrete(){
+       return LEMBRETE;
+   }
+   
+   public String goListaOperadores(){
+       return nivelPermissao(OPERADOR_LISTA, 4);
+   }
+ // ===================================================================================================
     public Operador getOperadorLogado() {
         return operadorLogado;
     }
@@ -328,14 +324,6 @@ public class OperadorMB extends BaseMB{
 
     public void setOperadorSelecionado(Operador operadorSelecionado) {
         this.operadorSelecionado = operadorSelecionado;
-    }
-
-    public Operador getOperadorSelecionadoInativo() {
-        return operadorSelecionadoInativo;
-    }
-
-    public void setOperadorSelecionadoInativo(Operador operadorSelecionadoInativo) {
-        this.operadorSelecionadoInativo = operadorSelecionadoInativo;
     }
 
     public Operador getOperadorView() {
@@ -428,7 +416,6 @@ public class OperadorMB extends BaseMB{
         }
         return digest;
     }  
-
 
 
 }

@@ -6,9 +6,9 @@
             position:absolute;
             margin-top:-5px;}
 
-.lembreteGrid2 {border: none !important;
+.capitalizar{
+    text-transform: capitalize;
 }
-
 .strongLabel{
           background-color: beige;
           box-shadow: 0 1px 0 #000;
@@ -21,4 +21,29 @@
 
 .semBorda{
     border: none !important;
+}
+
+.fdLight{
+    background-color: #FDF701;
+}
+
+.fdAzul{
+    background-color: #00FFF0;
+}
+.fdVerde{
+    background-color: #84FF01;
+}
+
+.fdRosa{
+    background-color: #FF00FF;
+}
+
+.fdLaran{
+    background-color: #FFE401;
+}
+.lembreteDescPq {
+    font-size:large; height:70%; display:block; overflow:hidden; text-overflow:ellipsis;
+}
+.lembretDesc{
+    font-size: large; width: 100%; background-color: transparent; color: black !important;
 }

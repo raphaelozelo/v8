@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+       xmlns:p="http://primefaces.org/ui">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="nivelAlerta" type="java.lang.Integer" shortDescription="Valor da Propriedade Nível do Lembrete" required="true" />
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <h:form>
+            <c:if test="#{cc.attrs.nivelAlerta.toString() eq '3'}">
+                <h:graphicImage name="/img/alerta1.svg" library="ozelo" style="float:left; width:7%" />
+            </c:if>
+            <c:if test="#{cc.attrs.nivelAlerta.toString() eq '2'}">
+                <h:graphicImage name="/img/alerta2.svg" library="ozelo" style="float:left; width:15%" />
+            </c:if>
+            <c:if test="#{cc.attrs.nivelAlerta.toString() eq '1'}">
+                <h:graphicImage name="/img/alerta3.svg" library="ozelo" style="float:left; width:15%" class="animated tada infinite" />
+            </c:if>
+        </h:form>
+    </cc:implementation>
+</html>
