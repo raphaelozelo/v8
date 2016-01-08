@@ -25,7 +25,7 @@ public class LembreteMB extends BaseMB{
  
     private List<Lembrete> lembretes; 
     private Lembrete lembreteSelecionado;
-    private Integer cashNivel = 1;
+    private Integer cashNivel = 0;
     private String cashDesc;
 
     public LembreteMB() {
@@ -52,6 +52,8 @@ public class LembreteMB extends BaseMB{
     public void cleanCash(){
     lembreteSelecionado = null;
     lembretes = null;
+    cashNivel = 0;
+    cashDesc = null;
     }
     
 public void novoLembrete(){
@@ -81,15 +83,19 @@ public void doDeletar(){
     if (lembreteSelecionado != null){
     lembreteService.removeLembrete(lembreteSelecionado);
     }
+    cleanCash();
     RequestContext.getCurrentInstance().execute("PF('lembreteDialog').hide();");
+    RequestContext.getCurrentInstance().update("form:lembreteTable");
 }
 
     public void okLembrete(){
        if (lembreteSelecionado != null){
       if (!(cashNivel.equals(lembreteSelecionado.getNivel()))||!(cashDesc.equals(lembreteSelecionado.getDescricao()))){     
         lembreteService.atualizaLembrete(lembreteSelecionado);
-    }  
-       RequestContext.getCurrentInstance().execute("PF('lembreteDialog').hide();");
+      }
+      cleanCash();
+      RequestContext.getCurrentInstance().execute("PF('lembreteDialog').hide();");
+      RequestContext.getCurrentInstance().update("form:lembreteTable");
     }
     }
     

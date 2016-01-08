@@ -85,7 +85,7 @@
     <div class="ShadowEffect">
         <p:panel class="#{lembrete.corCss}" style="height: 210px;" >
                 <h:panelGroup style="width: 100%">
-                <p:commandLink rendered="#{lembrete.nivelAlerta eq 'Normal'}"  type="button" styleClass="Fleft" action="#{lembreteMB.viewModal()}" >
+                    <p:commandLink rendered="#{lembrete.nivelAlerta eq 'Normal'}"  type="button" styleClass="Fleft" action="#{lembreteMB.viewModal()}" >
                  <f:param name="id" value="#{lembrete.id}" /><i class="icon-round54 blackFont Fs30"></i></p:commandLink>
                 <p:commandLink rendered="#{lembrete.nivelAlerta eq 'Alta'}" type="button" action="#{lembreteMB.viewModal()}" styleClass="Fleft" >
                  <f:param name="id" value="#{lembrete.id}" /><i class="icon-report blackFont Fs30"></i></p:commandLink>
