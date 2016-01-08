@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.validation.constraints.NotNull;
 import java.text.SimpleDateFormat;
+import javax.persistence.Basic;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
@@ -23,6 +24,7 @@ public class Lembrete implements Serializable {
     private Integer id;
     @Lob @Column
     @NotNull
+    @Basic (fetch = javax.persistence.FetchType.EAGER)
     private String descricao;
     @NotNull
     @ManyToOne
