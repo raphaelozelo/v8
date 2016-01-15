@@ -51,3 +51,15 @@
 .lembretDesc{
     font-size: large; width: 100%; background-color: transparent; color: black !important;
 }
+
+.lembreteCol {
+  float: left;
+  width: 29.999%;
+  overflow: hidden;
+}
+
+.LembreteCol.center {
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+}

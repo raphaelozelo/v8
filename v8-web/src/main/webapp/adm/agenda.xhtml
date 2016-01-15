@@ -20,10 +20,19 @@
                 <p:ajax event="dateSelect" listener="#{agendaMB.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
                 <p:ajax event="eventSelect" listener="#{agendaMB.eventoClicado}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
           </p:schedule>
+<<<<<<< OURS
+            <p:dialog widgetVar="eventDialog" header="Compromisso" showEffect="clip" hideEffect="clip" showHeader="true" resizable="false">
+           <h:panelGrid id="eventDetails" columns="1">
+            <p:messages autoUpdate="true" />
+            <p:inputText id="title" value="#{agendaMB.eventoSelecionado.title}" maxlength="50" required="true" size="50"
+                         placeholder="Título"  />
+ 
+=======
             <p:dialog id="eventDlg" widgetVar="eventDialog" modal="true" header="Compromisso" showEffect="clip" hideEffect="clip" showHeader="true" resizable="false">
         <h:panelGrid id="eventDetails" columns="1">
             <p:messages autoUpdate="true" /> 
             <p:inputText id="Titulo" value="#{agendaMB.eventoSelecionado.title}" maxlength="50" size="50" placeholder="Título"/>
+>>>>>>> THEIRS
             <h:panelGroup><i class="icon-set6 "> </i>
                 <p:calendar value="#{agendaMB.eventoSelecionado.startDate}" locale="pt" timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy HH:mm" />
             </h:panelGroup>  
@@ -36,6 +45,10 @@
             <h:panelGroup>
                 <p:commandButton icon="fa fa-check Fs16 White" styleClass="Fright BlueButton" actionListener="#{agendaMB.doSalvar}" />
             <p:commandButton icon="fa fa-trash Fs16 White" styleClass="Fright RedButton" actionListener="#{agendaMB.doDeletar}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
+<<<<<<< OURS
+            <p:commandButton icon="fa fa-check Fs16 White" styleClass="Fright BlueButton" validateClient="true" update="eventDetails" actionListener="#{agendaMB.doSalvar}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
+=======
+>>>>>>> THEIRS
             </h:panelGroup>
         </h:panelGrid>
     </p:dialog>  

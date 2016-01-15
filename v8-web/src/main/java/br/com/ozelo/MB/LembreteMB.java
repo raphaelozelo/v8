@@ -41,12 +41,17 @@ public class LembreteMB extends BaseMB{
         } 
     
     public void viewModal(){
+        System.out.println("lembretes:"+lembretes.size());
     lembreteSelecionado = findByParam();
     if (lembreteSelecionado != null){
     cashNivel = lembreteSelecionado.getNivel();
     cashDesc = lembreteSelecionado.getDescricao();
+               System.out.println("sel:"+lembreteSelecionado.getId());
+        System.out.println("lembretes:"+lembretes.size());
     RequestContext.getCurrentInstance().execute("PF('lembreteDialog').show();");
     }
+            System.out.println("sel:"+lembreteSelecionado.getId());
+        System.out.println("lembretes:"+lembretes.size());
     }
     
     public void cleanCash(){
@@ -84,7 +89,8 @@ public void doDeletar(){
     lembreteService.removeLembrete(lembreteSelecionado);
     }
     cleanCash();
-    RequestContext.getCurrentInstance().execute("PF('lembreteDialog').hide();");
+ //   RequestContext.getCurrentInstance().execute("PF('lembreteDialog').hide();");
+ RequestContext.getCurrentInstance().update("form:lembreteView");
     RequestContext.getCurrentInstance().update("form:lembreteTable");
 }
 
@@ -94,7 +100,8 @@ public void doDeletar(){
         lembreteService.atualizaLembrete(lembreteSelecionado);
       }
       cleanCash();
-      RequestContext.getCurrentInstance().execute("PF('lembreteDialog').hide();");
+  //    RequestContext.getCurrentInstance().execute("PF('lembreteDialog').hide();");
+  RequestContext.getCurrentInstance().update("form:lembreteView");
       RequestContext.getCurrentInstance().update("form:lembreteTable");
     }
     }
